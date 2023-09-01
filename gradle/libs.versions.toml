@@ -1,0 +1,67 @@
+[versions]
+agp = "8.1.0"
+kotlin-android = "1.9.0"
+ksp = "1.9.0-1.0.13"
+kotlinx_coroutines_android = "1.7.2"
+workRuntimeKtx = "2.8.1"
+constraint = "2.1.4"
+material = "1.9.0"
+appcompat = "1.6.1"
+kotlin = "1.10.1"
+koin = "3.4.0"
+livedata = "2.6.1"
+retrofit = "2.9.0"
+login_interceptor = "5.0.0-alpha.11"
+android-navigation = "2.7.0"
+room = "2.5.2"
+coil = "2.4.0"
+coroutines = "1.7.1"
+core_ktx = "1.10.1"
+
+
+[libraries]
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinx_coroutines_android" }
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx_coroutines_android" }
+
+#навигация
+navigation-dynamic-features-fragment = { group = "androidx.navigation", name = "navigation-dynamic-features-fragment", version.ref = "android-navigation" }
+navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "android-navigation" }
+navigation-safe-args = { group = "androidx.navigation", name = "navigation-safe-args-gradle-plugin", version.ref = "android-navigation" }
+navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "android-navigation" }
+
+#Android
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+constraint_layout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraint" }
+coil = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
+lifecycle_livedata_ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "livedata" }
+work-runtime-ktx = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "workRuntimeKtx" }
+
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+core_ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core_ktx" }
+
+#di
+koin_core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
+koin_android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
+koin_androidx_navigation = { group = "io.insert-koin", name = "koin-androidx-navigation", version.ref = "koin" }
+
+
+#netrwork
+converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+login_interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "login_interceptor" }
+
+#db
+room_runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+room_ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+room_compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin-android" }
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin-android" }
+kotlin-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+
+navigation-safe-args = { id = "androidx.navigation.safeargs.kotlin", version.ref = "android-navigation" }

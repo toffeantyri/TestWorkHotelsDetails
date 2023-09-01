@@ -1,11 +1,14 @@
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.navigation.safe.args)
+    alias(libs.plugins.kotlin.ksp)
 }
 
 android {
     namespace = "com.testwork.hotels"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.testwork.hotels"
@@ -30,6 +33,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+
     buildFeatures {
         viewBinding = true
     }
@@ -37,12 +41,38 @@ android {
 }
 
 dependencies {
-    //base
-    implementation("androidx.core:core-ktx:1.10.1")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.9.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
-    implementation("androidx.activity:activity-compose:1.7.2")
+    //di
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.navigation)
+
+//mvvm
+    implementation(libs.lifecycle.livedata.ktx)
+
+//network
+    implementation(libs.retrofit)
+    implementation(libs.converter.moshi)
+    implementation(libs.login.interceptor)
+
+    //base view
+    implementation(libs.core.ktx)
+    implementation(libs.appcompat)
+    implementation(libs.material)
+    implementation(libs.constraint.layout)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.coroutines.core)
+
+    //navigation
+    implementation(libs.navigation.fragment.ktx)
+    implementation(libs.navigation.ui.ktx)
+
+    // Feature module Support
+    implementation(libs.navigation.dynamic.features.fragment)
+
+    //image
+    implementation(libs.coil)
+
+    //layer
     implementation(project(":data"))
     implementation(project(":domain"))
 }

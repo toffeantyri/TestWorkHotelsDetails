@@ -13,5 +13,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "My Application"
+rootProject.name = "TestWork (EM)"
 include(":app")
+include(":data")
+include(":domain")

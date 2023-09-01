@@ -4,15 +4,17 @@ plugins {
 }
 
 android {
-    namespace = "com.testwork.hotels"
+    namespace = "com.testwork.data"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.testwork.hotels"
+        applicationId = "com.testwork.data"
         minSdk = 26
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -24,25 +26,19 @@ android {
             )
         }
     }
-
-
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
-    buildFeatures {
-        viewBinding = true
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
-
 }
 
 dependencies {
-    //base
+
     implementation("androidx.core:core-ktx:1.10.1")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.9.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
-    implementation("androidx.activity:activity-compose:1.7.2")
-    implementation(project(":data"))
-    implementation(project(":domain"))
+
+
+
 }

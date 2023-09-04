@@ -24,13 +24,13 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="@string/rating_number"
+            tools:text="5"
             android:paddingHorizontal="@dimen/small_margin" />
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="@string/rating_text" />
+            tools:text="Превосходно" />
 
     </LinearLayout>
 

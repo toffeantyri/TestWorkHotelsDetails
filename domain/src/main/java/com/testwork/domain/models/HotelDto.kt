@@ -11,4 +11,13 @@ data class HotelDto(
     val ratingName: String,
     val description: String,
     val peculiarities: List<String>
-)
+) : DelegateAdapterItem {
+    override fun id(): Any {
+        return id
+    }
+
+    override fun content(): Any {
+        return this
+    }
+
+}

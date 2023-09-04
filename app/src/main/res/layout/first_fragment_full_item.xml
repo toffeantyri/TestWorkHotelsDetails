@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_marginVertical="@dimen/default_margin"
+            android:gravity="center"
+            android:text="@string/f_f_title"
+            android:textAppearance="@style/RegularTextStyle"
+            android:textSize="16sp"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/image_pager"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:paddingHorizontal="@dimen/default_margin"
+            app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+        <include
+            android:id="@+id/rating_layout"
+            layout="@layout/rating_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_pager" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_hotel_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_marginVertical="@dimen/default_margin"
+            android:gravity="start"
+            android:maxLines="2"
+            android:textAppearance="@style/BoldTextStyle"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/rating_layout"
+            tools:text="TyanFuYan Resort" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_hotel_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:gravity="start"
+            android:maxLines="2"
+            android:textAppearance="@style/RegularTextStyle"
+            android:textColor="@color/blue"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_hotel_name"
+            tools:text="Сочинская набережная дом 4. Постучать трижды" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/hotel_min_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_marginVertical="@dimen/default_margin"
+            android:gravity="start"
+            android:maxLines="1"
+            android:textAppearance="@style/BoldTextStyle"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_hotel_address"
+            tools:text="от 200000 Р" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/hotel_min_price_by"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            android:gravity="start"
+            android:maxLines="1"
+            android:textAppearance="@style/RegularTextStyle"
+            android:textColor="@color/gray"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/hotel_min_price"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toEndOf="@+id/hotel_min_price"
+            tools:text="За тур с перелётом" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_about_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_marginTop="@dimen/big_margin"
+            android:gravity="start"
+            android:text="@string/f_f_title_about"
+            android:textAppearance="@style/RegularTextStyle"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/hotel_min_price" />
+
+        <androidx.constraintlayout.helper.widget.Flow
+            android:id="@+id/text_flow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            app:layout_constraintTop_toBottomOf="@id/tv_about_title" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:gravity="start"
+            android:textAppearance="@style/RegularTextStyle"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/text_flow"
+            tools:text="Отель вип класса, ваще топчик, всё олл инклюзив, хочешь купаться,
+         купайся, хочешь есть - ешь,
+         хочешь загорать - загорай,
+          НО ДО ДЕДЛАЙНА ДОЛЖЕН УСПЕТЬ ВСЁ СДАТЬ!" />
+
+        <HorizontalScrollView
+            android:id="@+id/chipScroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/small_margin"
+            android:layout_marginStart="15dp"
+            android:scrollbars="none"
+            app:layout_constraintTop_toBottomOf="@id/tv_description">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/subCategoryChipGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:selectionRequired="false"
+                app:singleSelection="false" />
+        </HorizontalScrollView>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/save_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_marginTop="@dimen/big_margin"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:enabled="true"
+            android:text="@string/f_f_button_text"
+            android:textAllCaps="false"
+            android:textAppearance="@style/SemiBolTextStyle"
+            android:textSize="14sp"
+            app:backgroundTint="@color/blue"
+            app:cornerRadius="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chipScroll" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

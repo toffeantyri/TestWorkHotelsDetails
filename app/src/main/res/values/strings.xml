@@ -3,8 +3,7 @@
     <string name="title_activity_main">MainActivity</string>
 
     <string name="f_f_title">Отель</string>
-    <string name="rating_number">5</string>
-    <string name="rating_text">Превосходно</string>
-
+    <string name="f_f_title_about">Об Отеле</string>
+    <string name="f_f_button_text">К выбору номера</string>
 
 </resources>

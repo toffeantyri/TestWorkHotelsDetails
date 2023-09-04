@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Hotel Details Test App</string>
     <string name="title_activity_main">MainActivity</string>
+
+    <string name="f_f_title">Отель</string>
+    <string name="rating_number">5</string>
+    <string name="rating_text">Превосходно</string>
+
+
 </resources>

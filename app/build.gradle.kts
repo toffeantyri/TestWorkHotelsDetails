@@ -49,11 +49,6 @@ dependencies {
 //mvvm
     implementation(libs.lifecycle.livedata.ktx)
 
-//network
-    implementation(libs.retrofit)
-    implementation(libs.converter.moshi)
-    implementation(libs.login.interceptor)
-
     //base view
     implementation(libs.core.ktx)
     implementation(libs.appcompat)

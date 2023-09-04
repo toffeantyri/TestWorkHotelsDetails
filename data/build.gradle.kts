@@ -20,3 +20,16 @@ android {
         jvmTarget = "17"
     }
 }
+
+dependencies {
+    //network
+    implementation(libs.retrofit)
+    implementation(libs.converter.moshi)
+    implementation(libs.login.interceptor)
+
+    //di
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
+
+
+}

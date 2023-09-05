@@ -141,11 +141,11 @@
         android:id="@+id/flow_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin"
         android:layout_marginHorizontal="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin"
         app:flow_firstHorizontalStyle="spread"
-        app:flow_wrapMode="chain"
         app:flow_horizontalBias="0"
+        app:flow_wrapMode="chain"
         app:layout_constraintTop_toBottomOf="@id/tv_about_title" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -163,33 +163,21 @@
          хочешь загорать - загорай,
           НО ДО ДЕДЛАЙНА ДОЛЖЕН УСПЕТЬ ВСЁ СДАТЬ!" />
 
-    <HorizontalScrollView
-        android:id="@+id/chipScroll"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/includes_options"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/small_margin"
-        android:layout_marginStart="15dp"
-        android:scrollbars="none"
-        app:layout_constraintTop_toBottomOf="@id/tv_description">
-
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/subCategoryChipGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:selectionRequired="false"
-            app:singleSelection="false" />
-    </HorizontalScrollView>
-
+        android:layout_marginTop="@dimen/default_margin"
+        tools:listitem="@layout/includes_opt_item"
+        tools:itemCount="3"
+        app:layout_constraintTop_toBottomOf="@id/tv_description" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/save_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/default_margin"
-        android:layout_marginTop="@dimen/big_margin"
+        android:layout_marginTop="@dimen/very_big_margin"
         android:layout_marginBottom="@dimen/default_margin"
         android:enabled="true"
         android:text="@string/f_f_button_text"
@@ -199,6 +187,6 @@
         app:backgroundTint="@color/blue"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/chipScroll" />
+        app:layout_constraintTop_toBottomOf="@id/includes_options" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

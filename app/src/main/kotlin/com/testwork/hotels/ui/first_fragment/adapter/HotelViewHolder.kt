@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
@@ -14,6 +15,8 @@ import com.testwork.hotels.databinding.FirstFragmentFullItemBinding
 import com.testwork.hotels.databinding.TextItemBinding
 import com.testwork.hotels.ui.base.delegateAdapter.CompositeAdapter
 import com.testwork.hotels.ui.base.image_adapter.ImageSliderAdapter
+import com.testwork.hotels.ui.first_fragment.adapter_includes_opt.IncludeOptionsAdapter
+import com.testwork.hotels.ui.models.IncludesTitleDto
 
 class HotelViewHolder(private val binding: FirstFragmentFullItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
@@ -23,6 +26,12 @@ class HotelViewHolder(private val binding: FirstFragmentFullItemBinding) :
     private val compositeAdapter by lazy {
         CompositeAdapter.Builder()
             .add(ImageSliderAdapter())
+            .build()
+    }
+
+    private val includesAdapter by lazy {
+        CompositeAdapter.Builder()
+            .add(IncludeOptionsAdapter())
             .build()
     }
 
@@ -39,8 +48,7 @@ class HotelViewHolder(private val binding: FirstFragmentFullItemBinding) :
             tvDescription.text = item.description
             initViewPager(item.imageUrls)
             initFlowGroup(item.peculiarities)
-
-
+            initIncludesOpt()
         }
     }
 
@@ -69,6 +77,33 @@ class HotelViewHolder(private val binding: FirstFragmentFullItemBinding) :
 
             }
             flowGroup.referencedIds = idList.toIntArray()
+        }
+    }
+
+    private fun initIncludesOpt() {
+        with(binding) {
+            includesOptions.adapter = includesAdapter
+            includesOptions.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            includesAdapter.submitList(
+                listOf(
+                    IncludesTitleDto(
+                        R.drawable.ic_comfort,
+                        R.string.comfort,
+                        R.string.most_important
+                    ),
+                    IncludesTitleDto(
+                        R.drawable.ic_includes,
+                        R.string.incl,
+                        R.string.most_important
+                    ),
+                    IncludesTitleDto(
+                        R.drawable.not_includes,
+                        R.string.not_incl,
+                        R.string.most_important
+                    )
+                )
+            )
         }
     }
 }

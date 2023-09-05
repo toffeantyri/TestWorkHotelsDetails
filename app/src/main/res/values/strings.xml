@@ -8,4 +8,9 @@
     <string name="f_f_price">От %d ₽</string>
     <string name="f_f_rating">%d %s</string>
 
+    <string name="comfort">Удобства</string>
+    <string name="incl">Что включено</string>
+    <string name="not_incl">Что не включено</string>
+    <string name="most_important">Самое необходимое</string>
+
 </resources>

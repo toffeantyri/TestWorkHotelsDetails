@@ -1,4 +1,4 @@
-package com.testwork.domain.use_cases
+package com.testwork.domain.use_cases.hotels
 
 import com.testwork.data.repository.hotels_repo.GetHotelsDataRepository
 import com.testwork.domain.mappers.toHotelDto

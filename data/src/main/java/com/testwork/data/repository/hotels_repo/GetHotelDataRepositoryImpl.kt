@@ -1,9 +1,9 @@
-package com.testwork.data.repository
+package com.testwork.data.repository.hotels_repo
 
 import android.util.Log
 import com.testwork.data.TAG
-import com.testwork.data.data_source.GetHotelsDataRemoteSource
-import com.testwork.data.models.remote.RemoteHotelDto
+import com.testwork.data.data_source.hotels_ds.GetHotelsDataRemoteSource
+import com.testwork.data.models.remote.hotel.RemoteHotelDto
 
 class GetHotelDataRepositoryImpl(private val remoteDataSource: GetHotelsDataRemoteSource) :
     GetHotelsDataRepository {

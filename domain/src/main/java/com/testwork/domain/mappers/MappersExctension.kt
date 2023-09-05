@@ -1,6 +1,6 @@
 package com.testwork.domain.mappers
 
-import com.testwork.data.models.remote.RemoteHotelDto
+import com.testwork.data.models.remote.hotel.RemoteHotelDto
 import com.testwork.domain.models.HotelDto
 import com.testwork.domain.models.LinkWrapperDto
 

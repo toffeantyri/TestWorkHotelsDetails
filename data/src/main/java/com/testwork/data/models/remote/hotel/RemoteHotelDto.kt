@@ -1,4 +1,4 @@
-package com.testwork.data.models.remote
+package com.testwork.data.models.remote.hotel
 
 import com.squareup.moshi.Json
 

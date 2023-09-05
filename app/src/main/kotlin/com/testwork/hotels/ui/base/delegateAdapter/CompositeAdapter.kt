@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.testwork.domain.models.DelegateAdapterItem
 
-
+@Suppress("UNCHECKED_CAST")
 class CompositeAdapter(
     private val delegates: SparseArray<DelegateAdapter<DelegateAdapterItem, RecyclerView.ViewHolder>>
 ) : ListAdapter<DelegateAdapterItem, RecyclerView.ViewHolder>(DelegateAdapterItemDiffCallback()) {
@@ -62,7 +62,6 @@ class CompositeAdapter(
         private val delegates: SparseArray<DelegateAdapter<DelegateAdapterItem, RecyclerView.ViewHolder>> =
             SparseArray()
 
-        @Suppress("UNCHECKED_CAST")
         fun add(delegateAdapter: DelegateAdapter<out DelegateAdapterItem, *>): Builder {
             delegates.put(
                 count++,

@@ -26,8 +26,38 @@
             android:id="@+id/image_pager"
             android:layout_width="match_parent"
             android:layout_height="257dp"
-            android:paddingHorizontal="@dimen/default_margin"
+            android:layout_marginVertical="@dimen/default_margin"
+            android:orientation="horizontal"
+            android:scrollIndicators="bottom"
             app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="17dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="0dp"
+            android:paddingVertical="@dimen/small_margin"
+            android:layout_marginBottom="@dimen/small_margin"
+            app:layout_constraintBottom_toBottomOf="@id/image_pager"
+            app:layout_constraintEnd_toEndOf="@id/image_pager"
+            app:layout_constraintStart_toStartOf="@id/image_pager">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:tabGravity="fill"
+                app:tabIndicatorHeight="10dp"
+                app:tabIndicatorFullWidth="false"
+                app:tabIndicatorColor="@color/black"
+                app:tabIndicatorGravity="center"
+                app:tabBackground="@drawable/tab_selector"
+                app:tabIndicator="@drawable/tab_selector"
+                app:tabIndicatorAnimationMode="elastic"
+                app:tabMode="fixed" />
+
+        </androidx.cardview.widget.CardView>
 
         <include
             android:id="@+id/rating_layout"
@@ -35,6 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"

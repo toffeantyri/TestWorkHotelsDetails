@@ -5,4 +5,6 @@
     <dimen name="default_margin">16dp</dimen>
     <dimen name="big_margin">24dp</dimen>
     <dimen name="very_big_margin">32dp</dimen>
+
+    <dimen name="image_radius">15dp</dimen>
 </resources>

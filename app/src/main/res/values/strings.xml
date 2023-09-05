@@ -5,5 +5,7 @@
     <string name="f_f_title">Отель</string>
     <string name="f_f_title_about">Об Отеле</string>
     <string name="f_f_button_text">К выбору номера</string>
+    <string name="f_f_price">От %d ₽</string>
+    <string name="f_f_rating">%d %s</string>
 
 </resources>

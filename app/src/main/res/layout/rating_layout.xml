@@ -1,36 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
-    app:cardBackgroundColor="@color/yellow"
-    app:cardCornerRadius="@dimen/medium_margin">
+    app:cardBackgroundColor="@color/orange_alpha"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="0dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:paddingHorizontal="@dimen/medium_margin"
         android:paddingVertical="@dimen/small_margin">
 
         <ImageView
+            android:id="@+id/rating_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/baseline_star_24"
             app:tint="@color/orange" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="5"
-            android:paddingHorizontal="@dimen/small_margin" />
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/rating_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Превосходно" />
+            android:paddingHorizontal="@dimen/small_margin"
+            android:textSize="16sp"
+            android:textColor="@color/orange"
+            tools:text="5 Превосходно" />
+
 
     </LinearLayout>
 

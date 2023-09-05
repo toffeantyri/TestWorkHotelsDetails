@@ -10,6 +10,27 @@
         android:id="@+id/firstFragment"
         android:name="com.testwork.hotels.ui.first_fragment.FirstFragment"
         android:label="first_fragment"
-        tools:layout="@layout/first_fragment" />
+        tools:layout="@layout/first_fragment">
+        <action
+            android:id="@+id/action_firstFragment_to_secondFragment"
+            app:destination="@id/secondFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/secondFragment"
+        android:name="com.testwork.hotels.ui.second_fragment.SecondFragment"
+        android:label="second_fragment"
+        tools:layout="@layout/second_fragment">
+        <argument
+            android:name="hotelName"
+            android:defaultValue=""
+            app:argType="string"
+            app:nullable="false" />
+    </fragment>
+
 
 </navigation>

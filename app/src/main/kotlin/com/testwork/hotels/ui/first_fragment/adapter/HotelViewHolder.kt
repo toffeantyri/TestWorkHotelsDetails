@@ -13,12 +13,16 @@ import com.testwork.domain.models.LinkWrapperDto
 import com.testwork.hotels.R
 import com.testwork.hotels.databinding.FirstFragmentFullItemBinding
 import com.testwork.hotels.databinding.TextItemBinding
+import com.testwork.hotels.ui.base.IOnClickNavigate
 import com.testwork.hotels.ui.base.delegateAdapter.CompositeAdapter
 import com.testwork.hotels.ui.base.image_adapter.ImageSliderAdapter
 import com.testwork.hotels.ui.first_fragment.adapter_includes_opt.IncludeOptionsAdapter
 import com.testwork.hotels.ui.models.IncludesTitleDto
 
-class HotelViewHolder(private val binding: FirstFragmentFullItemBinding) :
+class HotelViewHolder(
+    private val binding: FirstFragmentFullItemBinding,
+    private val onClickNext: IOnClickNavigate
+) :
     RecyclerView.ViewHolder(binding.root) {
 
     private val context = binding.root.context
@@ -46,6 +50,9 @@ class HotelViewHolder(private val binding: FirstFragmentFullItemBinding) :
             ratingLayout.ratingText.text =
                 context.getString(R.string.f_f_rating, item.rating, item.ratingName)
             tvDescription.text = item.description
+            nextButton.setOnClickListener {
+                onClickNext.toNextFragmentClicked()
+            }
             initViewPager(item.imageUrls)
             initFlowGroup(item.peculiarities)
             initIncludesOpt()

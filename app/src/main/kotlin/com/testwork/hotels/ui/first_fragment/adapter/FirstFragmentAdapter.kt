@@ -6,9 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.testwork.domain.models.DelegateAdapterItem
 import com.testwork.domain.models.HotelDto
 import com.testwork.hotels.databinding.FirstFragmentFullItemBinding
+import com.testwork.hotels.ui.base.IOnClickNavigate
 import com.testwork.hotels.ui.base.delegateAdapter.DelegateAdapter
 
-class FirstFragmentAdapter :
+class FirstFragmentAdapter(private val navInterface: IOnClickNavigate) :
     DelegateAdapter<HotelDto, HotelViewHolder>(HotelDto::class.java) {
 
 
@@ -16,7 +17,8 @@ class FirstFragmentAdapter :
         HotelViewHolder(
             FirstFragmentFullItemBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
-            )
+            ),
+            navInterface
         )
 
     override fun bindViewHolder(

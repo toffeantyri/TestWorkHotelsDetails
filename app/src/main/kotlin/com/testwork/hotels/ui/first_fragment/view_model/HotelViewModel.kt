@@ -36,5 +36,9 @@ class HotelViewModel(private val getHotelDataUseCase: GetHotelDataUseCase) : Vie
         }
     }
 
+    fun getHotelName(): String {
+        return _hotelLiveData.value?.name ?: ""
+    }
+
 
 }

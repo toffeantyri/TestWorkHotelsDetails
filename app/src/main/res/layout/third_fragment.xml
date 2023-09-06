@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -15,6 +16,71 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <include
+            android:id="@+id/rating_layout"
+            layout="@layout/rating_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_hotel_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_marginVertical="@dimen/default_margin"
+            android:gravity="start"
+            android:maxLines="2"
+            android:textAppearance="@style/BoldTextStyle"
+            android:textSize="22sp"
+            app:layout_constraintTop_toBottomOf="@id/rating_layout"
+            tools:text="TyanFuYan Resort" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_hotel_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:gravity="start"
+            android:maxLines="2"
+            android:textAppearance="@style/RegularTextStyle"
+            android:textColor="@color/blue"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_hotel_name"
+            tools:text="Сочинская набережная дом 4. Постучать трижды" />
+
+
+        <LinearLayout
+            android:id="@+id/row_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/tv_hotel_address">
+
+        </LinearLayout>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_about_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_marginTop="@dimen/big_margin"
+            android:gravity="start"
+            android:text="@string/f_f_title_about_user"
+            android:textAppearance="@style/SemiBolTextStyle"
+            android:textSize="22sp"
+            app:layout_constraintTop_toBottomOf="@id/row_container" />
+
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/next_button"
             android:layout_width="match_parent"
@@ -28,10 +94,12 @@
             android:textAllCaps="false"
             android:textAppearance="@style/SemiBolTextStyle"
             android:textSize="14sp"
+            tools:visibility="invisible"
             app:backgroundTint="@color/blue"
             app:cornerRadius="15dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar" />
-
+            app:layout_constraintTop_toBottomOf="@id/tv_about_title"
+            app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </ScrollView>

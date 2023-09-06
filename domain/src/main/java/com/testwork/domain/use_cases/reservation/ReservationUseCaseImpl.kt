@@ -5,7 +5,7 @@ import com.testwork.domain.mappers.toReservationDto
 import com.testwork.domain.models.ReservationDto
 
 class ReservationUseCaseImpl(private val repo: ReservationRepository) : ReservationUseCase {
-    override suspend fun getReservationData(): ReservationDto {
+    override suspend fun execute(): ReservationDto {
         return repo.getReservationData().toReservationDto()
     }
 

@@ -3,12 +3,14 @@ package com.testwork.hotels.ui.third_fragment
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
+import com.testwork.domain.models.ReservationDto
 import com.testwork.hotels.R
 import com.testwork.hotels.databinding.ThirdFragmentBinding
 import com.testwork.hotels.ui.base.BaseViewBindingFragment
 import com.testwork.hotels.ui.base.delegateAdapter.CompositeAdapter
 import com.testwork.hotels.ui.third_fragment.reservation_adapter.ReservationAdapter
 import com.testwork.hotels.ui.third_fragment.view_model.ReservationViewModel
+import com.testwork.hotels.ui.utils.showToast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmentBinding::inflate) {
@@ -23,7 +25,6 @@ class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmen
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initView()
-        initRecycler()
         super.onViewCreated(view, savedInstanceState)
         initSubscribers()
     }
@@ -43,18 +44,20 @@ class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmen
         }
     }
 
-
-    private fun initRecycler() {
-        with(binding) {
-
-        }
-    }
-
     private fun initSubscribers() {
         viewModel.reservationLiveData.observe(viewLifecycleOwner) {
-            compositeAdapter.submitList(listOf(it))
+            setViewData(it)
+            context?.showToast(it.arrivalCountry)
         }
     }
 
+    private fun setViewData(data: ReservationDto) {
+        with(binding) {
+            ratingLayout.ratingText.text =
+                getString(R.string.f_f_rating, data.horating, data.ratingName)
+            tvHotelName.text = data.hotelName
+            tvHotelAddress.text = data.hotelAddress
+        }
+    }
 
 }

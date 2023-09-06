@@ -4,6 +4,7 @@
 
     <string name="f_f_title">Отель</string>
     <string name="f_f_title_about">Об Отеле</string>
+    <string name="f_f_title_about_user">Информация о покупателе</string>
     <string name="f_f_button_text">К выбору номера</string>
     <string name="f_f_button_choose_text">Выбрать номер</string>
     <string name="f_f_price">От %d ₽</string>
@@ -24,5 +25,14 @@
 
     <string name="order_text_with_numbers">Подтверждение заказа №%d может занять некоторое время (от 1 часа до суток).
         Как только мы получим ответ от туроператора, вам на почту придет уведомление. </string>
+
+    <string name="arrive_by_title">Вылет из:</string>
+    <string name="country_city">Страна, город:</string>
+    <string name="dates">Даты:</string>
+    <string name="count_of_night">Кол-во ночей:</string>
+    <string name="hotel">Отель:</string>
+    <string name="room_number">Номер:</string>
+    <string name="eat">Питание:</string>
+
 
 </resources>

@@ -133,7 +133,7 @@
         android:layout_marginTop="@dimen/big_margin"
         android:gravity="start"
         android:text="@string/f_f_title_about"
-        android:textAppearance="@style/RegularTextStyle"
+        android:textAppearance="@style/SemiBolTextStyle"
         android:textSize="22sp"
         app:layout_constraintTop_toBottomOf="@id/hotel_min_price" />
 

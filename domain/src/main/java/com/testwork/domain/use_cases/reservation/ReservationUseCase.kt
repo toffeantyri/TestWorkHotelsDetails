@@ -4,6 +4,6 @@ import com.testwork.domain.models.ReservationDto
 
 interface ReservationUseCase {
 
-    suspend fun getReservationData(): ReservationDto
+    suspend fun execute(): ReservationDto
 
 }

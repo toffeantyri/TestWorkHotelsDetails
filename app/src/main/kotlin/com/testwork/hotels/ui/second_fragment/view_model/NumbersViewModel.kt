@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.testwork.domain.models.RoomDto
 import com.testwork.domain.use_cases.numbers.GetNumberDataUseCase
+import com.testwork.hotels.TAG
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -31,7 +32,7 @@ class NumbersViewModel(private val numbersDataUseCase: GetNumberDataUseCase) : V
             }.onSuccess {
                 _numbersLiveData.value = it
             }.onFailure {
-                Log.d("MyLog", "VM: ERROR $it")
+                Log.d(TAG, "VM: ERROR $it")
             }
         }
     }

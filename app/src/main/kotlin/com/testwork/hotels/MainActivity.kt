@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.testwork.hotels.databinding.MainActivityBinding
 
+const val TAG = "LOG_TAG"
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: MainActivityBinding

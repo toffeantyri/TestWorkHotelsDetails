@@ -14,8 +14,8 @@ val presentationModule = module {
 
     viewModel { NumbersViewModel(numbersDataUseCase = get(named(NAMED_GET_NUMBERS_USE_CASE))) }
 
-    viewModel { ReservationViewModel() } //todo
+    viewModel { ReservationViewModel(reservationUseCase = get(named(NAMED_GET_RESERVATION_USE_CASE))) }
 
-    viewModel { SuccessViewModel() } //todo
+    viewModel { SuccessViewModel() }
 
 }

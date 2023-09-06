@@ -2,10 +2,13 @@ package com.testwork.hotels.di
 
 import com.testwork.data.di.NAMED_HOTEL_REMOTE_REPO
 import com.testwork.data.di.NAMED_NUMBERS_REMOTE_REPO
+import com.testwork.data.di.NAMED_RESERVATION_REMOTE_REPO
 import com.testwork.domain.use_cases.hotels.GetHotelDataUseCase
 import com.testwork.domain.use_cases.hotels.GetHotelDataUseCaseImpl
 import com.testwork.domain.use_cases.numbers.GetNumberDataUseCase
 import com.testwork.domain.use_cases.numbers.GetNumberDataUseCaseImpl
+import com.testwork.domain.use_cases.reservation.ReservationUseCase
+import com.testwork.domain.use_cases.reservation.ReservationUseCaseImpl
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
@@ -17,5 +20,9 @@ val domainModule = module {
 
     factory<GetNumberDataUseCase>(named(NAMED_GET_NUMBERS_USE_CASE)) {
         GetNumberDataUseCaseImpl(get(named(NAMED_NUMBERS_REMOTE_REPO)))
+    }
+
+    factory<ReservationUseCase>(named(NAMED_GET_RESERVATION_USE_CASE)) {
+        ReservationUseCaseImpl(get(named(NAMED_RESERVATION_REMOTE_REPO)))
     }
 }

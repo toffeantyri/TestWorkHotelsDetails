@@ -4,8 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.testwork.domain.models.ReservationDto
+import com.testwork.domain.use_cases.reservation.ReservationUseCase
 
-class ReservationViewModel() : ViewModel() {
+class ReservationViewModel(private val reservationUseCase: ReservationUseCase) : ViewModel() {
 
     private val _reservationLiveData: MutableLiveData<ReservationDto> by lazy {
         MutableLiveData()

@@ -16,4 +16,6 @@
 
     <string name="more_info">Подробнее о номере</string>
 
+    <string name="reservation_next_buttom">Забронировать</string>
+
 </resources>

@@ -45,7 +45,7 @@ class FirstFragment : BaseViewBindingFragment<FirstFragmentBinding>(FirstFragmen
         }
     }
 
-    override fun toNextFragmentClicked() {
+    override fun toNextFragmentClicked(pos: Int) {
         val action = FirstFragmentDirections
             .actionFirstFragmentToSecondFragment(hotelName = viewModel.getHotelName())
         findNavController().navigate(action)

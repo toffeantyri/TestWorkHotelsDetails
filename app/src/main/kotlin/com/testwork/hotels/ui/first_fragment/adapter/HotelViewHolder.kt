@@ -51,7 +51,7 @@ class HotelViewHolder(
                 context.getString(R.string.f_f_rating, item.rating, item.ratingName)
             tvDescription.text = item.description
             nextButton.setOnClickListener {
-                onClickNext.toNextFragmentClicked()
+                onClickNext.toNextFragmentClicked(adapterPosition)
             }
             initViewPager(item.imageUrls)
             initFlowGroup(item.peculiarities)

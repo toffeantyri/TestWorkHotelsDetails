@@ -7,4 +7,13 @@ data class RoomDto(
     val peculiarities: List<String>,
     val price: Int,
     val pricePer: String
-)
+) : DelegateAdapterItem {
+    override fun id(): Any {
+        return id
+    }
+
+    override fun content(): Any {
+        return this
+    }
+
+}

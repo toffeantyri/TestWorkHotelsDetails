@@ -55,7 +55,7 @@
 
     <fragment
         android:id="@+id/fourthFragment"
-        android:name="com.testwork.hotels.ui.fourth_fragment.FourthFragmnet"
+        android:name="com.testwork.hotels.ui.fourth_fragment.FourthFragment"
         android:label="fourth_fragment"
         tools:layout="@layout/fourth_fragment">
         <action

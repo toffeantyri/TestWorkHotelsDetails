@@ -17,8 +17,7 @@ class ReservationViewModel() : ViewModel() {
     }
 
     private fun getReservationData() {
-        //todo
-        _reservationLiveData.value = ReservationDto(1)
+
     }
 
 }

@@ -36,6 +36,10 @@ class FourthFragment :
                 val action = FourthFragmentDirections.actionFourthFragmentToFirstFramgnet()
                 findNavController().navigate(action)
             }
+            toolbar.titleText.text = getString(R.string.order_payed_title)
+            toolbar.arrowLeftBack.setOnClickListener {
+                findNavController().popBackStack()
+            }
         }
     }
 

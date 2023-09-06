@@ -18,7 +18,9 @@
     <string name="button_success_super">Супер!</string>
 
     <string name="reservation_next_buttom">Забронировать</string>
+    <string name="reservation_title">Бронирование</string>
     <string name="order_in_work">Ваш заказ принят в работу</string>
+    <string name="order_payed_title">Заказ оплачен</string>
 
     <string name="order_text_with_numbers">Подтверждение заказа №%d может занять некоторое время (от 1 часа до суток).
         Как только мы получим ответ от туроператора, вам на почту придет уведомление. </string>

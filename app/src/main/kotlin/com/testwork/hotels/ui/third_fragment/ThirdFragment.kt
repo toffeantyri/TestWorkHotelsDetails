@@ -3,6 +3,7 @@ package com.testwork.hotels.ui.third_fragment
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
+import com.testwork.hotels.R
 import com.testwork.hotels.databinding.ThirdFragmentBinding
 import com.testwork.hotels.ui.base.BaseViewBindingFragment
 import com.testwork.hotels.ui.base.delegateAdapter.CompositeAdapter
@@ -32,6 +33,10 @@ class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmen
             nextButton.setOnClickListener {
                 val action = ThirdFragmentDirections.actionThirdFragmentToFourthFragment()
                 findNavController().navigate(action)
+            }
+            toolbar.titleText.text = getString(R.string.reservation_title)
+            toolbar.arrowLeftBack.setOnClickListener {
+                findNavController().popBackStack()
             }
 
 

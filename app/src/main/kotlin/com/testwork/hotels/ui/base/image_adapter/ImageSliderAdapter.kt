@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.testwork.domain.models.DelegateAdapterItem
-import com.testwork.domain.models.LinkWrapperDto
+import com.testwork.domain.models.pres_model.LinkWrapperDto
 import com.testwork.hotels.databinding.ImageItemBinding
 import com.testwork.hotels.ui.base.delegateAdapter.DelegateAdapter
 

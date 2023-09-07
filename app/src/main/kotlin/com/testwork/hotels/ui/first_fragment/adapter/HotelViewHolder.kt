@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
-import com.testwork.domain.models.HotelDto
-import com.testwork.domain.models.LinkWrapperDto
+import com.testwork.domain.models.pres_model.HotelDto
+import com.testwork.domain.models.pres_model.LinkWrapperDto
 import com.testwork.hotels.R
 import com.testwork.hotels.databinding.FirstFragmentFullItemBinding
 import com.testwork.hotels.databinding.TextItemBinding

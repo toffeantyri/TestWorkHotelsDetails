@@ -1,4 +1,6 @@
-package com.testwork.domain.models
+package com.testwork.domain.models.pres_model
+
+import com.testwork.domain.models.DelegateAdapterItem
 
 data class LinkWrapperDto(val link: String) : DelegateAdapterItem {
     override fun id(): Any {

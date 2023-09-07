@@ -1,5 +1,6 @@
 package com.testwork.hotels.di
 
+import com.testwork.data.di.NAMED_VALIDATE_INTERACTOR
 import com.testwork.hotels.ui.first_fragment.view_model.HotelViewModel
 import com.testwork.hotels.ui.fourth_fragment.viewmodel.SuccessViewModel
 import com.testwork.hotels.ui.second_fragment.view_model.NumbersViewModel
@@ -14,7 +15,12 @@ val presentationModule = module {
 
     viewModel { NumbersViewModel(numbersDataUseCase = get(named(NAMED_GET_NUMBERS_USE_CASE))) }
 
-    viewModel { ReservationViewModel(reservationUseCase = get(named(NAMED_GET_RESERVATION_USE_CASE))) }
+    viewModel {
+        ReservationViewModel(
+            reservationUseCase = get(named(NAMED_GET_RESERVATION_USE_CASE)),
+            validator = get(named(NAMED_VALIDATE_INTERACTOR))
+        )
+    }
 
     viewModel { SuccessViewModel() }
 

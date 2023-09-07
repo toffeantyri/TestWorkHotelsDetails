@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.testwork.domain.models.HotelDto
+import com.testwork.domain.models.pres_model.HotelDto
 import com.testwork.domain.use_cases.hotels.GetHotelDataUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

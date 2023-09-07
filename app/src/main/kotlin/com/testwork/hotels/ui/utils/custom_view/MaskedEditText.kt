@@ -6,7 +6,7 @@ import android.text.Selection
 import android.text.Spanned
 import android.text.TextWatcher
 import android.util.AttributeSet
-import androidx.appcompat.widget.AppCompatEditText
+import com.google.android.material.textfield.TextInputEditText
 import com.testwork.hotels.R
 
 private const val NUMBER_MASK = '9'
@@ -22,7 +22,7 @@ class MaskedEditText @JvmOverloads constructor(
     defStyleAttr: Int = androidx.appcompat.R.attr.editTextStyle,
     private var mask: String = "",
     private var placeholder: String = " "
-) : AppCompatEditText(context, attr, defStyleAttr) {
+) : TextInputEditText(context, attr, defStyleAttr) {
 
     init {
         val a = context.obtainStyledAttributes(attr, R.styleable.MaskedEditText)

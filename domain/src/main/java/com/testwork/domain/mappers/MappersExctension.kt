@@ -3,10 +3,10 @@ package com.testwork.domain.mappers
 import com.testwork.data.models.remote.hotel.RemoteHotelDto
 import com.testwork.data.models.remote.numbers.Room
 import com.testwork.data.models.remote.reservation.RemoteReservationDto
-import com.testwork.domain.models.HotelDto
-import com.testwork.domain.models.LinkWrapperDto
-import com.testwork.domain.models.ReservationDto
-import com.testwork.domain.models.RoomDto
+import com.testwork.domain.models.pres_model.HotelDto
+import com.testwork.domain.models.pres_model.LinkWrapperDto
+import com.testwork.domain.models.pres_model.ReservationDto
+import com.testwork.domain.models.pres_model.RoomDto
 
 const val UNKNOWN_INT = -1
 fun RemoteHotelDto.toHotelDto(): HotelDto {

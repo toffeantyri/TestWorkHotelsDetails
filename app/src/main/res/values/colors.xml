@@ -15,4 +15,6 @@
     <color name="gray">#828796</color>
     <color name="gray_alpha">#388A8A8A</color>
 
+    <color name="error">#26EB5757</color>
+
 </resources>

@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.testwork.domain.models.RoomDto
+import com.testwork.domain.models.pres_model.RoomDto
 import com.testwork.domain.use_cases.numbers.GetNumberDataUseCase
 import com.testwork.hotels.TAG
 import kotlinx.coroutines.Dispatchers

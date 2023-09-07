@@ -1,9 +1,16 @@
 package com.testwork.hotels.ui.third_fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
+import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
-import com.testwork.domain.models.ReservationDto
+import com.testwork.domain.base.AppEvent
+import com.testwork.domain.models.exeptions.EmailValidateException
+import com.testwork.domain.models.exeptions.ValidateColumnException
+import com.testwork.domain.models.pres_model.ReservationDto
 import com.testwork.hotels.R
 import com.testwork.hotels.databinding.ThirdFragmentBinding
 import com.testwork.hotels.ui.base.BaseViewBindingFragment
@@ -13,6 +20,7 @@ import com.testwork.hotels.ui.third_fragment.view_model.ReservationViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmentBinding::inflate) {
+
 
     private val viewModel: ReservationViewModel by viewModel()
 
@@ -28,22 +36,57 @@ class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmen
         initSubscribers()
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun initView() {
         with(binding) {
             nextButton.setOnClickListener {
-                val action = ThirdFragmentDirections.actionThirdFragmentToFourthFragment()
-                findNavController().navigate(action)
+                if (viewModel.validateEmailLiveData.value is AppEvent.Success
+                    && viewModel.validatePhoneLiveData.value is AppEvent.Success
+                ) {
+                    val action = ThirdFragmentDirections.actionThirdFragmentToFourthFragment()
+                    findNavController().navigate(action)
+                } else {
+                    val email = emailEditText.text.toString()
+                    val number = viewModel.formatNumber(phoneMaskedEditText.text.toString())
+                    viewModel.validateUserEmail(email)
+                    viewModel.validatePhoneNumber(number)
+                }
             }
             toolbar.titleText.text = getString(R.string.reservation_title)
             toolbar.arrowLeftBack.setOnClickListener {
                 findNavController().popBackStack()
             }
+
+            phoneMaskedEditText.setOnFocusChangeListener { _, _ ->
+                mainScrollContainer.smoothScrollTo(0, binding.agreemnetTextView.top)
+            }
+
+            emailEditText.setOnFocusChangeListener { _, _ ->
+                mainScrollContainer.smoothScrollTo(0, binding.agreemnetTextView.top)
+            }
+
+            phoneMaskedEditText.doOnTextChanged { text, _, _, _ ->
+                text?.let {
+                    val number = viewModel.formatNumber(it.toString())
+                    viewModel.validatePhoneNumber(number)
+                }
+            }
+            initEmailListener()
+
         }
     }
 
     private fun initSubscribers() {
         viewModel.reservationLiveData.observe(viewLifecycleOwner) {
             setViewData(it)
+        }
+
+        viewModel.validatePhoneLiveData.observe(viewLifecycleOwner) {
+            setStatePhone(it)
+        }
+
+        viewModel.validateEmailLiveData.observe(viewLifecycleOwner) {
+            setStateUserEmail(it)
         }
     }
 
@@ -80,6 +123,70 @@ class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmen
             eat.title.text = getString(R.string.eat)
             eat.data.text = data.nutrition
         }
+    }
+
+    private fun setStateUserEmail(state: AppEvent<*>) {
+        when (state) {
+            is AppEvent.Error -> {
+                when (state.error) {
+                    is EmailValidateException -> {
+                        binding.emailLayout.setBackgroundResource(R.drawable.error_shape)
+                        binding.emailLayout.error = (state.error as EmailValidateException).message
+                    }
+                }
+            }
+
+            is AppEvent.Success -> {
+                when (val item = state.data) {
+                    is String -> {
+                        val text = binding.emailEditText.text.toString()
+                        binding.emailLayout.setBackgroundResource(0)
+                        binding.emailLayout.error = null
+                        if (text != item) {
+                            binding.emailEditText.setText(item)
+                        }
+                    }
+                }
+            }
+
+            else -> {}
+        }
+    }
+
+
+    private fun setStatePhone(state: AppEvent<*>) {
+        when (state) {
+            is AppEvent.Error -> {
+                when (state.error) {
+                    is ValidateColumnException -> {
+                        binding.phoneLayout.setBackgroundResource(R.drawable.error_shape)
+                        binding.phoneLayout.error = (state.error as ValidateColumnException).message
+                    }
+                }
+            }
+
+            is AppEvent.Success -> {
+                when (state.data) {
+                    is String -> {
+                        binding.phoneLayout.setBackgroundResource(0)
+                        binding.phoneLayout.error = null
+                    }
+                }
+
+            }
+
+            else -> {}
+        }
+    }
+
+    private fun initEmailListener() {
+        binding.emailEditText.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                viewModel.validateUserEmail(s.toString())
+            }
+        })
     }
 
 }

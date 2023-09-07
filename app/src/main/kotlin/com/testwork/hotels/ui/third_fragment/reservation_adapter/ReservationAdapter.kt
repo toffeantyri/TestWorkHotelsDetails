@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.testwork.domain.models.DelegateAdapterItem
-import com.testwork.domain.models.ReservationDto
+import com.testwork.domain.models.pres_model.ReservationDto
 import com.testwork.hotels.databinding.ReservationItemBinding
 import com.testwork.hotels.ui.base.delegateAdapter.DelegateAdapter
 

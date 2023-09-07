@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.testwork.domain.models.DelegateAdapterItem
-import com.testwork.domain.models.RoomDto
+import com.testwork.domain.models.pres_model.RoomDto
 import com.testwork.hotels.databinding.NumberItemBinding
 import com.testwork.hotels.ui.base.IOnClickNavigate
 import com.testwork.hotels.ui.base.delegateAdapter.DelegateAdapter

@@ -10,7 +10,6 @@ import com.testwork.hotels.ui.base.BaseViewBindingFragment
 import com.testwork.hotels.ui.base.delegateAdapter.CompositeAdapter
 import com.testwork.hotels.ui.third_fragment.reservation_adapter.ReservationAdapter
 import com.testwork.hotels.ui.third_fragment.view_model.ReservationViewModel
-import com.testwork.hotels.ui.utils.showToast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmentBinding::inflate) {
@@ -45,7 +44,6 @@ class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmen
     private fun initSubscribers() {
         viewModel.reservationLiveData.observe(viewLifecycleOwner) {
             setViewData(it)
-            context?.showToast(it.arrivalCountry)
         }
     }
 

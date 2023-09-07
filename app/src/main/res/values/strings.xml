@@ -40,5 +40,11 @@
     <string name="room_number">Номер:</string>
     <string name="eat">Питание:</string>
 
+    <string name="phone_number">Номер телефона</string>
+    <string name="phone_mask">+7 (999) 999-99-99</string>
+    <string name="email">Почта</string>
+    <string name="user_data_agreement">Эти данные никому не передаются.
+        После оплаты мы вышлем чек на указанный вами номер и почту</string>
+
 
 </resources>

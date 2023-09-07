@@ -11,7 +11,6 @@
         android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.5"
         android:gravity="start"
         android:maxLines="1"
         android:textAppearance="@style/RegularTextStyle"
@@ -21,7 +20,7 @@
         app:layout_constraintEnd_toEndOf="@id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/arrive_by_title" />
+        tools:text="@string/departure" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/data"
@@ -42,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.3" />
+        app:layout_constraintGuide_percent="0.4" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

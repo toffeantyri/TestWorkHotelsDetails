@@ -4,34 +4,40 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.testwork.domain.base.AppEvent
 import com.testwork.domain.models.exeptions.EmailValidateException
 import com.testwork.domain.models.exeptions.ValidateColumnException
 import com.testwork.domain.models.pres_model.ReservationDto
 import com.testwork.hotels.R
+import com.testwork.hotels.TAG
 import com.testwork.hotels.databinding.ThirdFragmentBinding
 import com.testwork.hotels.ui.base.BaseViewBindingFragment
+import com.testwork.hotels.ui.base.TouristInterface
 import com.testwork.hotels.ui.base.delegateAdapter.CompositeAdapter
-import com.testwork.hotels.ui.third_fragment.reservation_adapter.ReservationAdapter
+import com.testwork.hotels.ui.third_fragment.reservation_adapter.TouristsAdapter
 import com.testwork.hotels.ui.third_fragment.view_model.ReservationViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmentBinding::inflate) {
+class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmentBinding::inflate),
+    TouristInterface {
 
 
     private val viewModel: ReservationViewModel by viewModel()
 
     private val compositeAdapter by lazy {
         CompositeAdapter.Builder()
-            .add(ReservationAdapter())
+            .add(TouristsAdapter(this))
             .build()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initView()
+        initTouristListAdapter()
         super.onViewCreated(view, savedInstanceState)
         initSubscribers()
     }
@@ -51,6 +57,10 @@ class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmen
                     viewModel.validateUserEmail(email)
                     viewModel.validatePhoneNumber(number)
                 }
+            }
+
+            addUserText.setOnClickListener {
+
             }
             toolbar.titleText.text = getString(R.string.reservation_title)
             toolbar.arrowLeftBack.setOnClickListener {
@@ -88,6 +98,24 @@ class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmen
         viewModel.validateEmailLiveData.observe(viewLifecycleOwner) {
             setStateUserEmail(it)
         }
+
+        viewModel.touristsList.observe(viewLifecycleOwner) {
+            Log.d(TAG, "VIEW: NEW LIST = $it")
+            compositeAdapter.submitList(it)
+        }
+
+        viewModel.price.observe(viewLifecycleOwner) {
+            //todo set data
+        }
+    }
+
+    private fun initTouristListAdapter() {
+        with(binding) {
+            touristListRv.adapter = compositeAdapter
+            touristListRv.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            touristListRv.isNestedScrollingEnabled = false
+        }
     }
 
     private fun setViewData(data: ReservationDto) {
@@ -122,6 +150,8 @@ class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmen
 
             eat.title.text = getString(R.string.eat)
             eat.data.text = data.nutrition
+
+
         }
     }
 
@@ -131,7 +161,8 @@ class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmen
                 when (state.error) {
                     is EmailValidateException -> {
                         binding.emailLayout.setBackgroundResource(R.drawable.error_shape)
-                        binding.emailLayout.error = (state.error as EmailValidateException).message
+                        binding.emailEditText.error =
+                            (state.error as EmailValidateException).message
                     }
                 }
             }
@@ -141,7 +172,7 @@ class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmen
                     is String -> {
                         val text = binding.emailEditText.text.toString()
                         binding.emailLayout.setBackgroundResource(0)
-                        binding.emailLayout.error = null
+                        binding.emailEditText.error = null
                         if (text != item) {
                             binding.emailEditText.setText(item)
                         }
@@ -160,7 +191,8 @@ class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmen
                 when (state.error) {
                     is ValidateColumnException -> {
                         binding.phoneLayout.setBackgroundResource(R.drawable.error_shape)
-                        binding.phoneLayout.error = (state.error as ValidateColumnException).message
+                        binding.phoneMaskedEditText.error =
+                            (state.error as ValidateColumnException).message
                     }
                 }
             }
@@ -169,7 +201,7 @@ class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmen
                 when (state.data) {
                     is String -> {
                         binding.phoneLayout.setBackgroundResource(0)
-                        binding.phoneLayout.error = null
+                        binding.phoneMaskedEditText.error = null
                     }
                 }
 
@@ -187,6 +219,10 @@ class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmen
                 viewModel.validateUserEmail(s.toString())
             }
         })
+    }
+
+    override fun openCloseItem(pos: Int) {
+        viewModel.openCloseItem(pos)
     }
 
 }

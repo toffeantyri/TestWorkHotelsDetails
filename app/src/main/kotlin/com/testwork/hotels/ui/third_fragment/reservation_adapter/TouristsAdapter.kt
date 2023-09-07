@@ -4,23 +4,24 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.testwork.domain.models.DelegateAdapterItem
-import com.testwork.domain.models.pres_model.ReservationDto
-import com.testwork.hotels.databinding.ReservationItemBinding
+import com.testwork.hotels.databinding.TouristItemBinding
+import com.testwork.hotels.ui.base.TouristInterface
 import com.testwork.hotels.ui.base.delegateAdapter.DelegateAdapter
+import com.testwork.hotels.ui.models.TouristDto
 
-class ReservationAdapter() :
-    DelegateAdapter<ReservationDto, ReservationViewHolder>(ReservationDto::class.java) {
+class TouristsAdapter(private val touristInterface: TouristInterface) :
+    DelegateAdapter<TouristDto, TouristViewHolder>(TouristDto::class.java) {
 
     override fun createViewHolder(parent: ViewGroup): RecyclerView.ViewHolder =
-        ReservationViewHolder(
-            ReservationItemBinding.inflate(
+        TouristViewHolder(
+            TouristItemBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
-            )
+            ), touristInterface
         )
 
     override fun bindViewHolder(
-        model: ReservationDto,
-        viewHolder: ReservationViewHolder,
+        model: TouristDto,
+        viewHolder: TouristViewHolder,
         payloads: List<DelegateAdapterItem.Payloadable>
     ) {
         viewHolder.bind(model)

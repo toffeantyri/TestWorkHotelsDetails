@@ -5,6 +5,14 @@
     <string name="f_f_title">Отель</string>
     <string name="f_f_title_about">Об Отеле</string>
     <string name="f_f_title_about_user">Информация о покупателе</string>
+    <string name="add_user">Добавить туриста</string>
+
+    <plurals name="add_user_text">
+        <item quantity="one">Первый</item>
+        <item quantity="two">Второй</item>
+        <item quantity="many">%D - й</item>
+    </plurals>
+
     <string name="f_f_button_text">К выбору номера</string>
     <string name="f_f_button_choose_text">Выбрать номер</string>
     <string name="f_f_price">От %d ₽</string>
@@ -39,6 +47,13 @@
     <string name="hotel">Отель:</string>
     <string name="room_number">Номер:</string>
     <string name="eat">Питание:</string>
+
+    <string name="name">Имя</string>
+    <string name="second_name">Фамилия</string>
+    <string name="date_of_birth">Дата рождения</string>
+    <string name="citizenship">Гражданство</string>
+    <string name="pasp_number">Номер паспорта</string>
+    <string name="data_pasp_en">Срок действия загранпаспорта</string>
 
     <string name="phone_number">Номер телефона</string>
     <string name="phone_mask">+7 (999) 999-99-99</string>

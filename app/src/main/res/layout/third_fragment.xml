@@ -202,6 +202,43 @@
             android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@id/email_layout" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tourist_list_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            app:layout_constraintBottom_toTopOf="@id/add_user_text"
+            app:layout_constraintTop_toBottomOf="@id/agreemnet_text_view"
+            tools:itemCount="1"
+            tools:listitem="@layout/tourist_item" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/add_user_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_marginTop="@dimen/big_margin"
+            android:gravity="start"
+            android:text="@string/add_user"
+            android:textAppearance="@style/SemiBolTextStyle"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tourist_list_rv" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="32dp"
+            android:minHeight="32dp"
+            android:padding="5dp"
+            android:background="@null"
+            android:src="@drawable/baseline_add_box_24"
+            android:layout_marginEnd="@dimen/default_margin"
+            app:layout_constraintBottom_toBottomOf="@id/add_user_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/add_user_text"
+            app:tint="@color/blue" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/next_button"
@@ -219,7 +256,7 @@
             app:backgroundTint="@color/blue"
             app:cornerRadius="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/agreemnet_text_view"
+            app:layout_constraintTop_toBottomOf="@id/add_user_text"
             tools:visibility="visible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -10,6 +10,8 @@ import com.testwork.domain.interactors.ValidateInteractor
 import com.testwork.domain.models.pres_model.ReservationDto
 import com.testwork.domain.use_cases.reservation.ReservationUseCase
 import com.testwork.hotels.TAG
+import com.testwork.hotels.ui.models.PriceDto
+import com.testwork.hotels.ui.models.TouristDto
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -34,6 +36,15 @@ class ReservationViewModel(
         MutableLiveData()
     }
     val reservationLiveData: LiveData<ReservationDto> get() = _reservationLiveData
+
+
+    val touristsList: MutableLiveData<List<TouristDto>> by lazy {
+        MutableLiveData(listOf(TouristDto()))
+    }
+
+    val price: MutableLiveData<PriceDto> by lazy {
+        MutableLiveData()
+    }
 
     init {
         getReservationData()
@@ -75,4 +86,39 @@ class ReservationViewModel(
     }
 
 
+    fun calculatePrice() {
+        viewModelScope.launch {
+            _reservationLiveData.value?.let { data ->
+                touristsList.value?.let { list ->
+                    val newPrice = withContext(Dispatchers.Default) {
+                        val touristCount = list.count()
+                        val tourPrice = data.tourPrice * touristCount
+                        val fuelCharge = data.fuelCharge * touristCount
+                        val servCharge = data.serviceCharge * touristCount
+                        val totalPirce = tourPrice + fuelCharge + servCharge
+                        PriceDto(
+                            tourPrice = tourPrice,
+                            fuelPrice = fuelCharge,
+                            servicePrice = servCharge,
+                            totalPrice = totalPirce
+                        )
+                    }
+                    price.value = newPrice
+                }
+            }
+        }
+    }
+
+    fun openCloseItem(pos: Int) {
+        Log.d(TAG, "VM: OPEN CLOSE CALLED")
+        touristsList.value?.let { list ->
+            list.getOrNull(pos)?.let { item ->
+                touristsList.value =
+                    list.mapIndexed { index, touristDto ->
+                        if (index == pos) touristDto.copy(isOpen = !item.isOpen)
+                        else touristDto
+                    }.toList()
+            }
+        }
+    }
 }

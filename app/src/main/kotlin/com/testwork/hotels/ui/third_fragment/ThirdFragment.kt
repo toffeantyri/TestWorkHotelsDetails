@@ -7,6 +7,9 @@ import android.text.TextWatcher
 import android.view.View
 import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.testwork.domain.base.AppEvent
 import com.testwork.domain.models.exeptions.EmailValidateException
 import com.testwork.domain.models.exeptions.ValidateColumnException
@@ -14,24 +17,25 @@ import com.testwork.domain.models.pres_model.ReservationDto
 import com.testwork.hotels.R
 import com.testwork.hotels.databinding.ThirdFragmentBinding
 import com.testwork.hotels.ui.base.BaseViewBindingFragment
-import com.testwork.hotels.ui.base.delegateAdapter.CompositeAdapter
-import com.testwork.hotels.ui.third_fragment.reservation_adapter.ReservationAdapter
+import com.testwork.hotels.ui.models.PriceDto
+import com.testwork.hotels.ui.third_fragment.reservation_adapter.DataChangerCallbackInterface
+import com.testwork.hotels.ui.third_fragment.reservation_adapter.TouristsAdapter
 import com.testwork.hotels.ui.third_fragment.view_model.ReservationViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmentBinding::inflate) {
+class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmentBinding::inflate),
+    DataChangerCallbackInterface {
 
 
     private val viewModel: ReservationViewModel by viewModel()
 
-    private val compositeAdapter by lazy {
-        CompositeAdapter.Builder()
-            .add(ReservationAdapter())
-            .build()
+    private val touristAdapter by lazy {
+        TouristsAdapter(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initView()
+        initTouristListAdapter()
         super.onViewCreated(view, savedInstanceState)
         initSubscribers()
     }
@@ -39,9 +43,10 @@ class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmen
     @SuppressLint("ClickableViewAccessibility")
     private fun initView() {
         with(binding) {
-            nextButton.setOnClickListener {
+            bottomItem.nextButton.setOnClickListener {
                 if (viewModel.validateEmailLiveData.value is AppEvent.Success
                     && viewModel.validatePhoneLiveData.value is AppEvent.Success
+                    && viewModel.getTouristsDataState() is AppEvent.Success
                 ) {
                     val action = ThirdFragmentDirections.actionThirdFragmentToFourthFragment()
                     findNavController().navigate(action)
@@ -50,20 +55,18 @@ class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmen
                     val number = viewModel.formatNumber(phoneMaskedEditText.text.toString())
                     viewModel.validateUserEmail(email)
                     viewModel.validatePhoneNumber(number)
+                    viewModel.updateTouristValidation()
                 }
+            }
+
+            addUserButton.setOnClickListener {
+                viewModel.addNewTourist()
             }
             toolbar.titleText.text = getString(R.string.reservation_title)
             toolbar.arrowLeftBack.setOnClickListener {
                 findNavController().popBackStack()
             }
 
-            phoneMaskedEditText.setOnFocusChangeListener { _, _ ->
-                mainScrollContainer.smoothScrollTo(0, binding.agreemnetTextView.top)
-            }
-
-            emailEditText.setOnFocusChangeListener { _, _ ->
-                mainScrollContainer.smoothScrollTo(0, binding.agreemnetTextView.top)
-            }
 
             phoneMaskedEditText.doOnTextChanged { text, _, _, _ ->
                 text?.let {
@@ -87,6 +90,29 @@ class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmen
 
         viewModel.validateEmailLiveData.observe(viewLifecycleOwner) {
             setStateUserEmail(it)
+        }
+
+        viewModel.touristsList.observe(viewLifecycleOwner) {
+            touristAdapter.submitList(it)
+        }
+
+        viewModel.price.observe(viewLifecycleOwner) {
+            setViewPrice(it)
+        }
+
+    }
+
+    private fun initTouristListAdapter() {
+        with(binding) {
+            touristListRv.adapter = touristAdapter
+            touristListRv.itemAnimator = object : DefaultItemAnimator() {
+                override fun canReuseUpdatedViewHolder(viewHolder: RecyclerView.ViewHolder): Boolean {
+                    return true
+                }
+            }
+            touristListRv.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            touristListRv.isNestedScrollingEnabled = false
         }
     }
 
@@ -122,6 +148,18 @@ class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmen
 
             eat.title.text = getString(R.string.eat)
             eat.data.text = data.nutrition
+
+
+        }
+    }
+
+    private fun setViewPrice(date: PriceDto) {
+        with(binding.bottomItem) {
+            tourData.text = getString(R.string.price_d, date.tourPrice)
+            fuelData.text = getString(R.string.price_d, date.fuelPrice)
+            serviceData.text = getString(R.string.price_d, date.servicePrice)
+            totalData.text = getString(R.string.price_d, date.totalPrice)
+            nextButton.text = getString(R.string.pay_d, date.totalPrice)
         }
     }
 
@@ -131,7 +169,8 @@ class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmen
                 when (state.error) {
                     is EmailValidateException -> {
                         binding.emailLayout.setBackgroundResource(R.drawable.error_shape)
-                        binding.emailLayout.error = (state.error as EmailValidateException).message
+                        binding.emailEditText.error =
+                            (state.error as EmailValidateException).message
                     }
                 }
             }
@@ -141,7 +180,7 @@ class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmen
                     is String -> {
                         val text = binding.emailEditText.text.toString()
                         binding.emailLayout.setBackgroundResource(0)
-                        binding.emailLayout.error = null
+                        binding.emailEditText.error = null
                         if (text != item) {
                             binding.emailEditText.setText(item)
                         }
@@ -160,7 +199,8 @@ class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmen
                 when (state.error) {
                     is ValidateColumnException -> {
                         binding.phoneLayout.setBackgroundResource(R.drawable.error_shape)
-                        binding.phoneLayout.error = (state.error as ValidateColumnException).message
+                        binding.phoneMaskedEditText.error =
+                            (state.error as ValidateColumnException).message
                     }
                 }
             }
@@ -169,7 +209,7 @@ class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmen
                 when (state.data) {
                     is String -> {
                         binding.phoneLayout.setBackgroundResource(0)
-                        binding.phoneLayout.error = null
+                        binding.phoneMaskedEditText.error = null
                     }
                 }
 
@@ -187,6 +227,31 @@ class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmen
                 viewModel.validateUserEmail(s.toString())
             }
         })
+    }
+
+
+    override fun nameChanged(pos: Int, text: String) {
+        viewModel.nameChanged(pos, text)
+    }
+
+    override fun secondNameChanged(pos: Int, text: String) {
+        viewModel.secondNameChanged(pos, text)
+    }
+
+    override fun dateOfBirthChanged(pos: Int, text: String) {
+        viewModel.dateOfBirthChanged(pos, text)
+    }
+
+    override fun citizenshipChanged(pos: Int, text: String) {
+        viewModel.citizenshipChanged(pos, text)
+    }
+
+    override fun paspNumberChanged(pos: Int, text: String) {
+        viewModel.paspNumberChanged(pos, text)
+    }
+
+    override fun paspEndDateChanged(pos: Int, text: String) {
+        viewModel.passportDateEndChanged(pos, text)
     }
 
 }

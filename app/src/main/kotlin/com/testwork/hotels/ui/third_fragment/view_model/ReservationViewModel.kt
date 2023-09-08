@@ -10,6 +10,8 @@ import com.testwork.domain.interactors.ValidateInteractor
 import com.testwork.domain.models.pres_model.ReservationDto
 import com.testwork.domain.use_cases.reservation.ReservationUseCase
 import com.testwork.hotels.TAG
+import com.testwork.hotels.ui.models.PriceDto
+import com.testwork.hotels.ui.models.TouristDto
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -24,7 +26,6 @@ class ReservationViewModel(
     }
     val validatePhoneLiveData: LiveData<AppEvent<*>> get() = _validatePhoneLiveData
 
-
     private val _validateEmailLiveData: MutableLiveData<AppEvent<*>> by lazy {
         MutableLiveData()
     }
@@ -34,6 +35,22 @@ class ReservationViewModel(
         MutableLiveData()
     }
     val reservationLiveData: LiveData<ReservationDto> get() = _reservationLiveData
+
+    private val _touristValidateLiveData: MutableLiveData<AppEvent<*>> =
+        MutableLiveData()
+
+
+    val touristsList: MutableLiveData<List<TouristDto>> by lazy {
+        MutableLiveData(listOf(TouristDto()))
+    }
+
+    val price: MutableLiveData<PriceDto> by lazy {
+        MutableLiveData()
+    }
+
+    fun getTouristsDataState(): AppEvent<*> {
+        return _touristValidateLiveData.value ?: AppEvent.Error<Throwable>(null)
+    }
 
     init {
         getReservationData()
@@ -47,6 +64,7 @@ class ReservationViewModel(
                 }
             }.onSuccess {
                 _reservationLiveData.value = it
+                calculatePrice()
             }.onFailure {
                 Log.d(TAG, "VM: $it")
             }
@@ -74,5 +92,93 @@ class ReservationViewModel(
         }
     }
 
+
+    private fun calculatePrice() {
+        viewModelScope.launch {
+            _reservationLiveData.value?.let { data ->
+                touristsList.value?.let { list ->
+                    val newPrice = withContext(Dispatchers.Default) {
+                        val touristCount = list.count()
+                        val tourPrice = data.tourPrice * touristCount
+                        val fuelCharge = data.fuelCharge * touristCount
+                        val servCharge = data.serviceCharge * touristCount
+                        val totalPirce = tourPrice + fuelCharge + servCharge
+                        PriceDto(
+                            tourPrice = tourPrice,
+                            fuelPrice = fuelCharge,
+                            servicePrice = servCharge,
+                            totalPrice = totalPirce
+                        )
+                    }
+                    price.value = newPrice
+                }
+            }
+        }
+    }
+
+    fun addNewTourist() {
+        val newList = touristsList.value?.toMutableList()
+        newList?.add(TouristDto())
+        touristsList.value = newList
+        calculatePrice()
+    }
+
+    private fun touristDataChanged() {
+        viewModelScope.launch {
+            _touristValidateLiveData.value =
+                if (touristsList.value?.all { it.fieldsIsNotEmpty() } == true)
+                    AppEvent.Success(Unit)
+                else AppEvent.Error<Throwable>(null)
+        }
+    }
+
+    fun updateTouristValidation() {
+        touristsList.value = touristsList.value?.map {
+            it.needValidate = true
+            it
+        }
+    }
+
+    fun nameChanged(pos: Int, value: String) {
+        touristsList.value?.getOrNull(pos)?.let { item ->
+            item.firstName = value
+            touristDataChanged()
+        }
+    }
+
+    fun secondNameChanged(pos: Int, value: String) {
+        touristsList.value?.getOrNull(pos)?.let { item ->
+            item.secondName = value
+            touristDataChanged()
+        }
+    }
+
+    fun dateOfBirthChanged(pos: Int, value: String) {
+        touristsList.value?.getOrNull(pos)?.let { item ->
+            item.dateOfBirth = value
+            touristDataChanged()
+        }
+    }
+
+    fun citizenshipChanged(pos: Int, value: String) {
+        touristsList.value?.getOrNull(pos)?.let { item ->
+            item.citizenShip = value
+            touristDataChanged()
+        }
+    }
+
+    fun paspNumberChanged(pos: Int, value: String) {
+        touristsList.value?.getOrNull(pos)?.let { item ->
+            item.passportNumbers = value
+            touristDataChanged()
+        }
+    }
+
+    fun passportDateEndChanged(pos: Int, value: String) {
+        touristsList.value?.getOrNull(pos)?.let { item ->
+            item.endDateOfPassport = value
+            touristDataChanged()
+        }
+    }
 
 }

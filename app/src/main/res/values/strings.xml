@@ -15,10 +15,17 @@
 
     <string name="add_user_text_with_d">%d-Й</string>
     <string name="tourist">\ турист</string>
+    <string name="tour">Тур</string>
+    <string name="fuel">Топливный сбор</string>
+    <string name="service">Сервисный сбор</string>
+    <string name="total">К оплате</string>
 
     <string name="f_f_button_text">К выбору номера</string>
     <string name="f_f_button_choose_text">Выбрать номер</string>
+    <string name="pay">Оплатить</string>
+    <string name="pay_d">Оплатить %d ₽</string>
     <string name="f_f_price">От %d ₽</string>
+    <string name="price_d">%d ₽</string>
     <string name="f_f_rating">%d %s</string>
 
     <string name="comfort">Удобства</string>

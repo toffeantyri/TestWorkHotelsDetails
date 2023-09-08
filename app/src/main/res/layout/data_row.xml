@@ -20,7 +20,7 @@
         app:layout_constraintEnd_toEndOf="@id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/departure" />
+        tools:text="@string/departure_title" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/data"

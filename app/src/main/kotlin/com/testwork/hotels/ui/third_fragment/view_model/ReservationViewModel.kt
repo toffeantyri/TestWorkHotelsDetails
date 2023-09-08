@@ -36,7 +36,7 @@ class ReservationViewModel(
     }
     val reservationLiveData: LiveData<ReservationDto> get() = _reservationLiveData
 
-    val _touristValidateLiveData: MutableLiveData<AppEvent<*>> =
+    private val _touristValidateLiveData: MutableLiveData<AppEvent<*>> =
         MutableLiveData()
 
 
@@ -64,6 +64,7 @@ class ReservationViewModel(
                 }
             }.onSuccess {
                 _reservationLiveData.value = it
+                calculatePrice()
             }.onFailure {
                 Log.d(TAG, "VM: $it")
             }
@@ -92,7 +93,7 @@ class ReservationViewModel(
     }
 
 
-    fun calculatePrice() {
+    private fun calculatePrice() {
         viewModelScope.launch {
             _reservationLiveData.value?.let { data ->
                 touristsList.value?.let { list ->
@@ -119,6 +120,7 @@ class ReservationViewModel(
         val newList = touristsList.value?.toMutableList()
         newList?.add(TouristDto())
         touristsList.value = newList
+        calculatePrice()
     }
 
     private fun touristDataChanged() {

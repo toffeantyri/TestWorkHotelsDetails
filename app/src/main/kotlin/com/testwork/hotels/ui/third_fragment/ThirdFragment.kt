@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
@@ -16,9 +15,9 @@ import com.testwork.domain.models.exeptions.EmailValidateException
 import com.testwork.domain.models.exeptions.ValidateColumnException
 import com.testwork.domain.models.pres_model.ReservationDto
 import com.testwork.hotels.R
-import com.testwork.hotels.TAG
 import com.testwork.hotels.databinding.ThirdFragmentBinding
 import com.testwork.hotels.ui.base.BaseViewBindingFragment
+import com.testwork.hotels.ui.models.PriceDto
 import com.testwork.hotels.ui.third_fragment.reservation_adapter.DataChangerCallbackInterface
 import com.testwork.hotels.ui.third_fragment.reservation_adapter.TouristsAdapter
 import com.testwork.hotels.ui.third_fragment.view_model.ReservationViewModel
@@ -44,7 +43,7 @@ class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmen
     @SuppressLint("ClickableViewAccessibility")
     private fun initView() {
         with(binding) {
-            nextButton.setOnClickListener {
+            bottomItem.nextButton.setOnClickListener {
                 if (viewModel.validateEmailLiveData.value is AppEvent.Success
                     && viewModel.validatePhoneLiveData.value is AppEvent.Success
                     && viewModel.getTouristsDataState() is AppEvent.Success
@@ -94,16 +93,11 @@ class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmen
         }
 
         viewModel.touristsList.observe(viewLifecycleOwner) {
-            Log.d(TAG, "VIEW: NEW LIST = $it")
             touristAdapter.submitList(it)
         }
 
         viewModel.price.observe(viewLifecycleOwner) {
-            //todo set data
-        }
-
-        viewModel._touristValidateLiveData.observe(viewLifecycleOwner) {
-            Log.d(TAG, "VIEW TS $it")
+            setViewPrice(it)
         }
 
     }
@@ -156,6 +150,16 @@ class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmen
             eat.data.text = data.nutrition
 
 
+        }
+    }
+
+    private fun setViewPrice(date: PriceDto) {
+        with(binding.bottomItem) {
+            tourData.text = getString(R.string.price_d, date.tourPrice)
+            fuelData.text = getString(R.string.price_d, date.fuelPrice)
+            serviceData.text = getString(R.string.price_d, date.servicePrice)
+            totalData.text = getString(R.string.price_d, date.totalPrice)
+            nextButton.text = getString(R.string.pay_d, date.totalPrice)
         }
     }
 

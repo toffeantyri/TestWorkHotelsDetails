@@ -67,6 +67,11 @@ dependencies {
     //image
     implementation(libs.coil)
 
+    //di
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.navigation)
+
     //layer
     implementation(project(":data"))
     implementation(project(":domain"))

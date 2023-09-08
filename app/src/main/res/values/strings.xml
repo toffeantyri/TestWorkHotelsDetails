@@ -1,4 +1,75 @@
 <resources>
     <string name="app_name">Hotel Details Test App</string>
     <string name="title_activity_main">MainActivity</string>
+
+    <string name="f_f_title">Отель</string>
+    <string name="f_f_title_about">Об Отеле</string>
+    <string name="f_f_title_about_user">Информация о покупателе</string>
+    <string name="add_user">Добавить туриста</string>
+
+    <plurals name="add_user_text">
+        <item quantity="one">Первый</item>
+        <item quantity="few">Второй</item>
+        <item quantity="other">%D - й</item>
+    </plurals>
+
+    <string name="add_user_text_with_d">%d-Й</string>
+    <string name="tourist">\ турист</string>
+    <string name="tour">Тур</string>
+    <string name="fuel">Топливный сбор</string>
+    <string name="service">Сервисный сбор</string>
+    <string name="total">К оплате</string>
+
+    <string name="f_f_button_text">К выбору номера</string>
+    <string name="f_f_button_choose_text">Выбрать номер</string>
+    <string name="pay">Оплатить</string>
+    <string name="pay_d">Оплатить %d ₽</string>
+    <string name="f_f_price">От %d ₽</string>
+    <string name="price_d">%d ₽</string>
+    <string name="f_f_rating">%d %s</string>
+
+    <string name="comfort">Удобства</string>
+    <string name="incl">Что включено</string>
+    <string name="not_incl">Что не включено</string>
+    <string name="most_important">Самое необходимое</string>
+
+    <string name="more_info">Подробнее о номере</string>
+    <string name="button_success_super">Супер!</string>
+
+    <string name="reservation_next_buttom">Забронировать</string>
+    <string name="reservation_title">Бронирование</string>
+    <string name="order_in_work">Ваш заказ принят в работу</string>
+    <string name="order_payed_title">Заказ оплачен</string>
+
+    <string name="order_text_with_numbers">Подтверждение заказа №%d может занять некоторое время (от 1 часа до суток).
+        Как только мы получим ответ от туроператора, вам на почту придет уведомление. </string>
+
+    <string name="departure_title">Вылет из:</string>
+    <string name="country_city">Страна, город:</string>
+    <string name="dates">Даты:</string>
+    <string name="dates_value">%s - %s</string>
+    <string name="count_of_night">Кол-во ночей:</string>
+    <plurals name="count_of_night_value">
+        <item quantity="one">%d ночь</item>
+        <item quantity="few">%d ночи</item>
+        <item quantity="many">%d ночей</item>
+    </plurals>
+    <string name="hotel">Отель:</string>
+    <string name="room_number">Номер:</string>
+    <string name="eat">Питание:</string>
+
+    <string name="name">Имя</string>
+    <string name="second_name">Фамилия</string>
+    <string name="date_of_birth">Дата рождения</string>
+    <string name="citizenship">Гражданство</string>
+    <string name="pasp_number">Номер паспорта</string>
+    <string name="data_pasp_en">Срок действия загранпаспорта</string>
+
+    <string name="phone_number">Номер телефона</string>
+    <string name="phone_mask">+7 (999) 999-99-99</string>
+    <string name="email">Почта</string>
+    <string name="user_data_agreement">Эти данные никому не передаются.
+        После оплаты мы вышлем чек на указанный вами номер и почту</string>
+
+
 </resources>

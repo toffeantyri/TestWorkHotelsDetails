@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Theme.MyApplication" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
@@ -14,4 +14,17 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="RegularTextStyle">
+        <item name="fontFamily">@font/sf_pro_display_regular</item>
+    </style>
+
+    <style name="SemiBolTextStyle">
+        <item name="fontFamily">@font/sf_pro_display_semibold</item>
+    </style>
+
+    <style name="BoldTextStyle">
+        <item name="fontFamily">@font/sf_pro_display_bold</item>
+    </style>
+
 </resources>

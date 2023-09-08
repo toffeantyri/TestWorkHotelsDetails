@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_scroll_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/item_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/rating_layout"
+            layout="@layout/rating_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_hotel_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_marginVertical="@dimen/default_margin"
+            android:gravity="start"
+            android:maxLines="2"
+            android:textAppearance="@style/BoldTextStyle"
+            android:textSize="22sp"
+            app:layout_constraintTop_toBottomOf="@id/rating_layout"
+            tools:text="TyanFuYan Resort" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_hotel_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:gravity="start"
+            android:maxLines="2"
+            android:textAppearance="@style/RegularTextStyle"
+            android:textColor="@color/blue"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_hotel_name"
+            tools:text="Сочинская набережная дом 4. Постучать трижды" />
+
+
+        <LinearLayout
+            android:id="@+id/row_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/tv_hotel_address">
+
+            <include
+                android:id="@+id/departure"
+                layout="@layout/data_row" />
+
+            <include
+                android:id="@+id/country"
+                layout="@layout/data_row" />
+
+            <include
+                android:id="@+id/date"
+                layout="@layout/data_row" />
+
+            <include
+                android:id="@+id/count_of_night"
+                layout="@layout/data_row" />
+
+            <include
+                android:id="@+id/hotel"
+                layout="@layout/data_row" />
+
+            <include
+                android:id="@+id/room"
+                layout="@layout/data_row" />
+
+            <include
+                android:id="@+id/eat"
+                layout="@layout/data_row" />
+
+        </LinearLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_about_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_marginTop="@dimen/big_margin"
+            android:gravity="start"
+            android:text="@string/f_f_title_about_user"
+            android:textAppearance="@style/SemiBolTextStyle"
+            android:textSize="22sp"
+            app:layout_constraintTop_toBottomOf="@id/row_container" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/phone_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:hint="@string/phone_number"
+            android:paddingVertical="@dimen/small_margin"
+            app:boxBackgroundColor="@null"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxStrokeColor="@color/gray"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="1dp"
+            app:endIconMode="none"
+            app:expandedHintEnabled="false"
+            app:hintTextColor="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_about_title">
+
+            <com.testwork.hotels.ui.utils.custom_view.MaskedEditText
+                android:id="@+id/phone_masked_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:cursorVisible="false"
+                android:inputType="phone"
+                android:lines="1"
+                android:minHeight="48dp"
+                android:padding="0dp"
+                android:textAppearance="@style/RegularTextStyle"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:mask="@string/phone_mask"
+                app:placeholder="_" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:hint="@string/email"
+            android:paddingVertical="@dimen/small_margin"
+            app:boxBackgroundColor="@null"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxStrokeColor="@android:color/darker_gray"
+            app:boxStrokeErrorColor="@color/error"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:endIconMode="none"
+            app:expandedHintEnabled="false"
+            app:hintTextColor="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phone_layout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:imeOptions="actionDone"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:minHeight="48dp"
+                android:singleLine="true"
+                android:textAppearance="@style/RegularTextStyle"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@null"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/agreemnet_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:gravity="start"
+            android:text="@string/user_data_agreement"
+            android:textAppearance="@style/RegularTextStyle"
+            android:textColor="@color/gray"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/email_layout" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tourist_list_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            app:layout_constraintBottom_toTopOf="@id/add_user_text"
+            app:layout_constraintTop_toBottomOf="@id/agreemnet_text_view"
+            tools:itemCount="1"
+            tools:listitem="@layout/tourist_item" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/add_user_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_marginTop="@dimen/big_margin"
+            android:gravity="start"
+            android:text="@string/add_user"
+            android:textAppearance="@style/SemiBolTextStyle"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/bottom_item"
+            app:layout_constraintTop_toBottomOf="@id/tourist_list_rv" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/add_user_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:background="@null"
+            android:minWidth="32dp"
+            android:minHeight="32dp"
+            android:padding="5dp"
+            android:src="@drawable/baseline_add_box_24"
+            app:layout_constraintBottom_toBottomOf="@id/add_user_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/add_user_text"
+            app:tint="@color/blue" />
+
+        <include
+            android:id="@+id/bottom_item"
+            layout="@layout/bottom_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/add_user_text" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

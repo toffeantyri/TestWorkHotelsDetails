@@ -26,7 +26,6 @@ class ReservationViewModel(
     }
     val validatePhoneLiveData: LiveData<AppEvent<*>> get() = _validatePhoneLiveData
 
-
     private val _validateEmailLiveData: MutableLiveData<AppEvent<*>> by lazy {
         MutableLiveData()
     }
@@ -37,6 +36,9 @@ class ReservationViewModel(
     }
     val reservationLiveData: LiveData<ReservationDto> get() = _reservationLiveData
 
+    val _touristValidateLiveData: MutableLiveData<AppEvent<*>> =
+        MutableLiveData()
+
 
     val touristsList: MutableLiveData<List<TouristDto>> by lazy {
         MutableLiveData(listOf(TouristDto()))
@@ -44,6 +46,10 @@ class ReservationViewModel(
 
     val price: MutableLiveData<PriceDto> by lazy {
         MutableLiveData()
+    }
+
+    fun getTouristsDataState(): AppEvent<*> {
+        return _touristValidateLiveData.value ?: AppEvent.Error<Throwable>(null)
     }
 
     init {
@@ -113,6 +119,64 @@ class ReservationViewModel(
         val newList = touristsList.value?.toMutableList()
         newList?.add(TouristDto())
         touristsList.value = newList
+    }
+
+    private fun touristDataChanged() {
+        viewModelScope.launch {
+            _touristValidateLiveData.value =
+                if (touristsList.value?.all { it.fieldsIsNotEmpty() } == true)
+                    AppEvent.Success(Unit)
+                else AppEvent.Error<Throwable>(null)
+        }
+    }
+
+    fun updateTouristValidation() {
+        touristsList.value = touristsList.value?.map {
+            it.needValidate = true
+            it
+        }
+    }
+
+    fun nameChanged(pos: Int, value: String) {
+        touristsList.value?.getOrNull(pos)?.let { item ->
+            item.firstName = value
+            touristDataChanged()
+        }
+    }
+
+    fun secondNameChanged(pos: Int, value: String) {
+        touristsList.value?.getOrNull(pos)?.let { item ->
+            item.secondName = value
+            touristDataChanged()
+        }
+    }
+
+    fun dateOfBirthChanged(pos: Int, value: String) {
+        touristsList.value?.getOrNull(pos)?.let { item ->
+            item.dateOfBirth = value
+            touristDataChanged()
+        }
+    }
+
+    fun citizenshipChanged(pos: Int, value: String) {
+        touristsList.value?.getOrNull(pos)?.let { item ->
+            item.citizenShip = value
+            touristDataChanged()
+        }
+    }
+
+    fun paspNumberChanged(pos: Int, value: String) {
+        touristsList.value?.getOrNull(pos)?.let { item ->
+            item.passportNumbers = value
+            touristDataChanged()
+        }
+    }
+
+    fun passportDateEndChanged(pos: Int, value: String) {
+        touristsList.value?.getOrNull(pos)?.let { item ->
+            item.endDateOfPassport = value
+            touristDataChanged()
+        }
     }
 
 }

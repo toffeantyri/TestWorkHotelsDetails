@@ -7,4 +7,14 @@ data class TouristDto(
     var citizenShip: String = "",
     var passportNumbers: String = "",
     var endDateOfPassport: String = "",
-)
+    var needValidate: Boolean = false
+) {
+    fun fieldsIsNotEmpty(): Boolean {
+        return firstName.isNotBlank()
+                && secondName.isNotBlank()
+                && dateOfBirth.isNotBlank()
+                && citizenShip.isNotBlank()
+                && passportNumbers.isNotBlank()
+                && endDateOfPassport.isNotBlank()
+    }
+}

@@ -8,7 +8,8 @@ import com.testwork.hotels.databinding.TouristItemBinding
 import com.testwork.hotels.ui.models.TouristDto
 import com.testwork.hotels.ui.third_fragment.utils.TouristInterface
 
-class TouristsAdapter : RecyclerView.Adapter<TouristViewHolder>(), TouristInterface {
+class TouristsAdapter(private val touristDataChangerInterface: DataChangerCallbackInterface) :
+    RecyclerView.Adapter<TouristViewHolder>(), TouristInterface {
 
     companion object {
         const val FIRST_TOURIST_INDEX = 0
@@ -28,7 +29,7 @@ class TouristsAdapter : RecyclerView.Adapter<TouristViewHolder>(), TouristInterf
         return TouristViewHolder(
             TouristItemBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
-            ), this
+            ), this, touristDataChangerInterface
         )
     }
 
@@ -39,7 +40,9 @@ class TouristsAdapter : RecyclerView.Adapter<TouristViewHolder>(), TouristInterf
     }
 
     override fun openItem(pos: Int) {
-        posExpanded.add(pos)
+        if (posExpanded.contains(pos).not()) {
+            posExpanded.add(pos)
+        }
         notifyItemChanged(pos)
     }
 

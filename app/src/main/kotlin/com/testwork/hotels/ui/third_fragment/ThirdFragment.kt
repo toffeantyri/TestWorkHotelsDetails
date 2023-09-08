@@ -19,17 +19,19 @@ import com.testwork.hotels.R
 import com.testwork.hotels.TAG
 import com.testwork.hotels.databinding.ThirdFragmentBinding
 import com.testwork.hotels.ui.base.BaseViewBindingFragment
+import com.testwork.hotels.ui.third_fragment.reservation_adapter.DataChangerCallbackInterface
 import com.testwork.hotels.ui.third_fragment.reservation_adapter.TouristsAdapter
 import com.testwork.hotels.ui.third_fragment.view_model.ReservationViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmentBinding::inflate) {
+class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmentBinding::inflate),
+    DataChangerCallbackInterface {
 
 
     private val viewModel: ReservationViewModel by viewModel()
 
-    private val compositeAdapter by lazy {
-        TouristsAdapter()
+    private val touristAdapter by lazy {
+        TouristsAdapter(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,6 +47,7 @@ class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmen
             nextButton.setOnClickListener {
                 if (viewModel.validateEmailLiveData.value is AppEvent.Success
                     && viewModel.validatePhoneLiveData.value is AppEvent.Success
+                    && viewModel.getTouristsDataState() is AppEvent.Success
                 ) {
                     val action = ThirdFragmentDirections.actionThirdFragmentToFourthFragment()
                     findNavController().navigate(action)
@@ -53,6 +56,7 @@ class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmen
                     val number = viewModel.formatNumber(phoneMaskedEditText.text.toString())
                     viewModel.validateUserEmail(email)
                     viewModel.validatePhoneNumber(number)
+                    viewModel.updateTouristValidation()
                 }
             }
 
@@ -64,13 +68,6 @@ class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmen
                 findNavController().popBackStack()
             }
 
-            phoneMaskedEditText.setOnFocusChangeListener { _, _ ->
-                mainScrollContainer.smoothScrollTo(0, binding.agreemnetTextView.top)
-            }
-
-            emailEditText.setOnFocusChangeListener { _, _ ->
-                mainScrollContainer.smoothScrollTo(0, binding.agreemnetTextView.top)
-            }
 
             phoneMaskedEditText.doOnTextChanged { text, _, _, _ ->
                 text?.let {
@@ -98,17 +95,22 @@ class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmen
 
         viewModel.touristsList.observe(viewLifecycleOwner) {
             Log.d(TAG, "VIEW: NEW LIST = $it")
-            compositeAdapter.submitList(it)
+            touristAdapter.submitList(it)
         }
 
         viewModel.price.observe(viewLifecycleOwner) {
             //todo set data
         }
+
+        viewModel._touristValidateLiveData.observe(viewLifecycleOwner) {
+            Log.d(TAG, "VIEW TS $it")
+        }
+
     }
 
     private fun initTouristListAdapter() {
         with(binding) {
-            touristListRv.adapter = compositeAdapter
+            touristListRv.adapter = touristAdapter
             touristListRv.itemAnimator = object : DefaultItemAnimator() {
                 override fun canReuseUpdatedViewHolder(viewHolder: RecyclerView.ViewHolder): Boolean {
                     return true
@@ -221,6 +223,31 @@ class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmen
                 viewModel.validateUserEmail(s.toString())
             }
         })
+    }
+
+
+    override fun nameChanged(pos: Int, text: String) {
+        viewModel.nameChanged(pos, text)
+    }
+
+    override fun secondNameChanged(pos: Int, text: String) {
+        viewModel.secondNameChanged(pos, text)
+    }
+
+    override fun dateOfBirthChanged(pos: Int, text: String) {
+        viewModel.dateOfBirthChanged(pos, text)
+    }
+
+    override fun citizenshipChanged(pos: Int, text: String) {
+        viewModel.citizenshipChanged(pos, text)
+    }
+
+    override fun paspNumberChanged(pos: Int, text: String) {
+        viewModel.paspNumberChanged(pos, text)
+    }
+
+    override fun paspEndDateChanged(pos: Int, text: String) {
+        viewModel.passportDateEndChanged(pos, text)
     }
 
 }

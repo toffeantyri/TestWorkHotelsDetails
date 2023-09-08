@@ -12,7 +12,8 @@ import com.testwork.hotels.ui.third_fragment.utils.TouristInterface
 
 class TouristViewHolder(
     private val binding: TouristItemBinding,
-    private val touristInterface: TouristInterface
+    private val touristInterface: TouristInterface,
+    private val touristDataInterface: DataChangerCallbackInterface
 ) :
     RecyclerView.ViewHolder(binding.root) {
 
@@ -44,7 +45,6 @@ class TouristViewHolder(
 
             touristNumber.text = touristNumberText
 
-
             fieldContainer.isVisible = isOpen
             openCloseButton.rotation = if (isOpen) ARROW_OPEN_POS else ARROW_CLOSE_POS
             openCloseButton.setOnClickListener {
@@ -53,47 +53,70 @@ class TouristViewHolder(
                 )
             }
 
-            nameEditText.setText(item.firstName)
-            nameEditText.doOnTextChanged { text, _, _, _ ->
-                item.firstName = text.toString()
-                nameLayout.checkIsEmpty(text.toString())
-
+            nameEditText.apply {
+                setText(item.firstName)
+                if (item.needValidate) {
+                    nameLayout.checkIsEmpty(item.firstName)
+                }
+                nameEditText.doOnTextChanged { text, _, _, _ ->
+                    nameLayout.checkIsEmpty(text.toString())
+                    touristDataInterface.nameChanged(adapterPosition, text.toString())
+                }
             }
 
-            secondNameEt.setText(item.secondName)
-            secondNameEt.doOnTextChanged { text, _, _, _ ->
-                item.secondName = text.toString()
-                secondNamelayout.checkIsEmpty(text.toString())
-
+            secondNameEt.apply {
+                setText(item.secondName)
+                if (item.needValidate) {
+                    secondNamelayout.checkIsEmpty(item.secondName)
+                }
+                secondNameEt.doOnTextChanged { text, _, _, _ ->
+                    secondNamelayout.checkIsEmpty(text.toString())
+                    touristDataInterface.secondNameChanged(adapterPosition, text.toString())
+                }
+            }
+            dateOfBirthEdText.apply {
+                setText(item.dateOfBirth)
+                if (item.needValidate) {
+                    dateOfBirthLayout.checkIsEmpty(item.dateOfBirth)
+                }
+                dateOfBirthEdText.doOnTextChanged { text, _, _, _ ->
+                    dateOfBirthLayout.checkIsEmpty(text.toString())
+                    touristDataInterface.dateOfBirthChanged(adapterPosition, text.toString())
+                }
+            }
+            citizEditText.apply {
+                setText(item.citizenShip)
+                if (item.needValidate) {
+                    citizLayout.checkIsEmpty(item.citizenShip)
+                }
+                citizEditText.doOnTextChanged { text, _, _, _ ->
+                    citizLayout.checkIsEmpty(text.toString())
+                    touristDataInterface.citizenshipChanged(adapterPosition, text.toString())
+                }
             }
 
-            dateOfBirthEdText.setText(item.dateOfBirth)
-            dateOfBirthEdText.doOnTextChanged { text, _, _, _ ->
-                item.dateOfBirth = text.toString()
-                dateOfBirthLayout.checkIsEmpty(text.toString())
-
+            paspNumbEditText.apply {
+                setText(item.passportNumbers)
+                if (item.needValidate) {
+                    paspNumbLayout.checkIsEmpty(item.passportNumbers)
+                }
+                paspNumbEditText.doOnTextChanged { text, _, _, _ ->
+                    paspNumbLayout.checkIsEmpty(text.toString())
+                    touristDataInterface.paspNumberChanged(adapterPosition, text.toString())
+                }
             }
 
-            citizEditText.setText(item.citizenShip)
-            citizEditText.doOnTextChanged { text, _, _, _ ->
-                item.citizenShip = text.toString()
-                citizLayout.checkIsEmpty(text.toString())
-
+            dateEndPaspEditText.apply {
+                setText(item.endDateOfPassport)
+                if (item.needValidate) {
+                    dateEndPaspLayout.checkIsEmpty(item.endDateOfPassport)
+                }
+                dateEndPaspEditText.doOnTextChanged { text, _, _, _ ->
+                    dateEndPaspLayout.checkIsEmpty(text.toString())
+                    touristDataInterface.paspEndDateChanged(adapterPosition, text.toString())
+                }
             }
-
-            paspNumbEditText.setText(item.passportNumbers)
-            paspNumbEditText.doOnTextChanged { text, _, _, _ ->
-                item.passportNumbers = text.toString()
-                paspNumbLayout.checkIsEmpty(text.toString())
-
-            }
-
-            dateEndPaspEditText.setText(item.endDateOfPassport)
-            dateEndPaspEditText.doOnTextChanged { text, _, _, _ ->
-                item.endDateOfPassport = text.toString()
-                dateEndPaspLayout.checkIsEmpty(text.toString())
-            }
-
+            item.needValidate = false
         }
     }
 
@@ -104,4 +127,6 @@ class TouristViewHolder(
             this.setBackgroundResource(0)
         }
     }
+
+
 }

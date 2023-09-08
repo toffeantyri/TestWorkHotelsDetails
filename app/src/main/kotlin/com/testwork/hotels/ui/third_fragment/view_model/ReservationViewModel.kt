@@ -108,4 +108,11 @@ class ReservationViewModel(
             }
         }
     }
+
+    fun addNewTourist() {
+        val newList = touristsList.value?.toMutableList()
+        newList?.add(TouristDto())
+        touristsList.value = newList
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.testwork.hotels.ui.base
+package com.testwork.hotels.ui.third_fragment.utils
 
 interface TouristInterface {
 

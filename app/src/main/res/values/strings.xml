@@ -9,9 +9,12 @@
 
     <plurals name="add_user_text">
         <item quantity="one">Первый</item>
-        <item quantity="two">Второй</item>
-        <item quantity="many">%D - й</item>
+        <item quantity="few">Второй</item>
+        <item quantity="other">%D - й</item>
     </plurals>
+
+    <string name="add_user_text_with_d">%d-Й</string>
+    <string name="tourist">\ турист</string>
 
     <string name="f_f_button_text">К выбору номера</string>
     <string name="f_f_button_choose_text">Выбрать номер</string>

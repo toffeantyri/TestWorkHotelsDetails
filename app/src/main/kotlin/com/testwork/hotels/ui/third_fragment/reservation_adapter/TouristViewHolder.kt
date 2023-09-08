@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputLayout
 import com.testwork.hotels.R
 import com.testwork.hotels.databinding.TouristItemBinding
-import com.testwork.hotels.ui.base.TouristInterface
 import com.testwork.hotels.ui.models.TouristDto
+import com.testwork.hotels.ui.third_fragment.utils.TouristInterface
 
 class TouristViewHolder(
     private val binding: TouristItemBinding,
@@ -17,8 +17,8 @@ class TouristViewHolder(
     RecyclerView.ViewHolder(binding.root) {
 
     companion object {
-        const val ARROW_OPEN_POS = 90f
-        const val ARROW_CLOSE_POS = 270f
+        const val ARROW_OPEN_POS = 270f
+        const val ARROW_CLOSE_POS = 90f
     }
 
     private val context = binding.root.context
@@ -28,8 +28,23 @@ class TouristViewHolder(
             mainConstraintContainer.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
             mainConstraintContainer.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
 
-            touristNumber.text =
-                context.resources.getQuantityString(R.plurals.add_user_text, adapterPosition + 1)
+            val touristNumberText = buildString {
+                if (adapterPosition < 2) {
+                    append(
+                        context.resources.getQuantityString(
+                            R.plurals.add_user_text,
+                            adapterPosition + 1
+                        )
+                    )
+                } else {
+                    append(context.getString(R.string.add_user_text_with_d, adapterPosition + 1))
+                }
+                append(context.getString(R.string.tourist))
+            }
+
+            touristNumber.text = touristNumberText
+
+
             fieldContainer.isVisible = isOpen
             openCloseButton.rotation = if (isOpen) ARROW_OPEN_POS else ARROW_CLOSE_POS
             openCloseButton.setOnClickListener {

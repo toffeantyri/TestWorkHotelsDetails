@@ -56,8 +56,8 @@ class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmen
                 }
             }
 
-            addUserText.setOnClickListener {
-
+            addUserButton.setOnClickListener {
+                viewModel.addNewTourist()
             }
             toolbar.titleText.text = getString(R.string.reservation_title)
             toolbar.arrowLeftBack.setOnClickListener {

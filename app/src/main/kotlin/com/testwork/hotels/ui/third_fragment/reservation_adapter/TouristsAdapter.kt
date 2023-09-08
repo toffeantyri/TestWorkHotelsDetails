@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.testwork.hotels.databinding.TouristItemBinding
-import com.testwork.hotels.ui.base.TouristInterface
 import com.testwork.hotels.ui.models.TouristDto
+import com.testwork.hotels.ui.third_fragment.utils.TouristInterface
 
 class TouristsAdapter : RecyclerView.Adapter<TouristViewHolder>(), TouristInterface {
 

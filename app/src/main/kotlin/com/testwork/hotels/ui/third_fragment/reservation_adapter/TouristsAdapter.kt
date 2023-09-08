@@ -1,30 +1,51 @@
 package com.testwork.hotels.ui.third_fragment.reservation_adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.testwork.domain.models.DelegateAdapterItem
 import com.testwork.hotels.databinding.TouristItemBinding
 import com.testwork.hotels.ui.base.TouristInterface
-import com.testwork.hotels.ui.base.delegateAdapter.DelegateAdapter
 import com.testwork.hotels.ui.models.TouristDto
 
-class TouristsAdapter(private val touristInterface: TouristInterface) :
-    DelegateAdapter<TouristDto, TouristViewHolder>(TouristDto::class.java) {
+class TouristsAdapter : RecyclerView.Adapter<TouristViewHolder>(), TouristInterface {
 
-    override fun createViewHolder(parent: ViewGroup): RecyclerView.ViewHolder =
-        TouristViewHolder(
+    companion object {
+        const val FIRST_TOURIST_INDEX = 0
+    }
+
+    private var itemList: List<TouristDto> = listOf()
+
+    private val posExpanded = arrayListOf<Int>(FIRST_TOURIST_INDEX)
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun submitList(list: List<TouristDto>) {
+        itemList = list
+        notifyDataSetChanged()
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TouristViewHolder {
+        return TouristViewHolder(
             TouristItemBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
-            ), touristInterface
+            ), this
         )
+    }
 
-    override fun bindViewHolder(
-        model: TouristDto,
-        viewHolder: TouristViewHolder,
-        payloads: List<DelegateAdapterItem.Payloadable>
-    ) {
-        viewHolder.bind(model)
+    override fun getItemCount(): Int = itemList.size
+
+    override fun onBindViewHolder(holder: TouristViewHolder, position: Int) {
+        holder.bind(itemList[position], posExpanded.contains(position))
+    }
+
+    override fun openItem(pos: Int) {
+        posExpanded.add(pos)
+        notifyItemChanged(pos)
+    }
+
+    override fun closeItem(pos: Int) {
+        posExpanded.remove(pos)
+        notifyItemChanged(pos)
     }
 
 }

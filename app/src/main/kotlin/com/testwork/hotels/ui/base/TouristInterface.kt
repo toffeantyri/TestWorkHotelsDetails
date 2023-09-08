@@ -2,6 +2,7 @@ package com.testwork.hotels.ui.base
 
 interface TouristInterface {
 
-    fun openCloseItem(pos: Int)
+    fun openItem(pos: Int)
+    fun closeItem(pos: Int)
 
 }

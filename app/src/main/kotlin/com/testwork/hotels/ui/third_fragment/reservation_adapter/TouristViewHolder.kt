@@ -1,12 +1,11 @@
 package com.testwork.hotels.ui.third_fragment.reservation_adapter
 
-import android.util.Log
+import android.animation.LayoutTransition
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputLayout
 import com.testwork.hotels.R
-import com.testwork.hotels.TAG
 import com.testwork.hotels.databinding.TouristItemBinding
 import com.testwork.hotels.ui.base.TouristInterface
 import com.testwork.hotels.ui.models.TouristDto
@@ -19,20 +18,24 @@ class TouristViewHolder(
 
     companion object {
         const val ARROW_OPEN_POS = 90f
-        const val ARROW_CLOSE_POS = 90f
+        const val ARROW_CLOSE_POS = 270f
     }
 
     private val context = binding.root.context
 
-    fun bind(item: TouristDto) {
+    fun bind(item: TouristDto, isOpen: Boolean) {
         with(binding) {
-            Log.d(TAG, "HOLDER ${item.isOpen}")
+            mainConstraintContainer.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
+            mainConstraintContainer.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
+
             touristNumber.text =
                 context.resources.getQuantityString(R.plurals.add_user_text, adapterPosition + 1)
-            fieldContainer.isVisible = item.isOpen
-            openCloseButton.rotation = if (item.isOpen) ARROW_OPEN_POS else ARROW_CLOSE_POS
+            fieldContainer.isVisible = isOpen
+            openCloseButton.rotation = if (isOpen) ARROW_OPEN_POS else ARROW_CLOSE_POS
             openCloseButton.setOnClickListener {
-                touristInterface.openCloseItem(adapterPosition)
+                if (isOpen) touristInterface.closeItem(adapterPosition) else touristInterface.openItem(
+                    adapterPosition
+                )
             }
 
             nameEditText.setText(item.firstName)

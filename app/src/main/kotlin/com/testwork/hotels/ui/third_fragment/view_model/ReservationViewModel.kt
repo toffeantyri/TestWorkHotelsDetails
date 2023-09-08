@@ -108,17 +108,4 @@ class ReservationViewModel(
             }
         }
     }
-
-    fun openCloseItem(pos: Int) {
-        Log.d(TAG, "VM: OPEN CLOSE CALLED")
-        touristsList.value?.let { list ->
-            list.getOrNull(pos)?.let { item ->
-                touristsList.value =
-                    list.mapIndexed { index, touristDto ->
-                        if (index == pos) touristDto.copy(isOpen = !item.isOpen)
-                        else touristDto
-                    }.toList()
-            }
-        }
-    }
 }

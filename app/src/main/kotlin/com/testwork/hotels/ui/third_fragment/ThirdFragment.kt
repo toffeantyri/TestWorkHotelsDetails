@@ -8,7 +8,9 @@ import android.util.Log
 import android.view.View
 import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.testwork.domain.base.AppEvent
 import com.testwork.domain.models.exeptions.EmailValidateException
 import com.testwork.domain.models.exeptions.ValidateColumnException
@@ -17,22 +19,17 @@ import com.testwork.hotels.R
 import com.testwork.hotels.TAG
 import com.testwork.hotels.databinding.ThirdFragmentBinding
 import com.testwork.hotels.ui.base.BaseViewBindingFragment
-import com.testwork.hotels.ui.base.TouristInterface
-import com.testwork.hotels.ui.base.delegateAdapter.CompositeAdapter
 import com.testwork.hotels.ui.third_fragment.reservation_adapter.TouristsAdapter
 import com.testwork.hotels.ui.third_fragment.view_model.ReservationViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmentBinding::inflate),
-    TouristInterface {
+class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmentBinding::inflate) {
 
 
     private val viewModel: ReservationViewModel by viewModel()
 
     private val compositeAdapter by lazy {
-        CompositeAdapter.Builder()
-            .add(TouristsAdapter(this))
-            .build()
+        TouristsAdapter()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -112,6 +109,11 @@ class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmen
     private fun initTouristListAdapter() {
         with(binding) {
             touristListRv.adapter = compositeAdapter
+            touristListRv.itemAnimator = object : DefaultItemAnimator() {
+                override fun canReuseUpdatedViewHolder(viewHolder: RecyclerView.ViewHolder): Boolean {
+                    return true
+                }
+            }
             touristListRv.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             touristListRv.isNestedScrollingEnabled = false
@@ -219,10 +221,6 @@ class ThirdFragment : BaseViewBindingFragment<ThirdFragmentBinding>(ThirdFragmen
                 viewModel.validateUserEmail(s.toString())
             }
         })
-    }
-
-    override fun openCloseItem(pos: Int) {
-        viewModel.openCloseItem(pos)
     }
 
 }
